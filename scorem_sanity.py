@@ -56,13 +56,21 @@ def main():
     #
     teamlist = data.TEAMS_DEFAULT
     schedule = game.generate_schedule_single_pairs(teamlist)
+    game_generation_results = game.generate_games_from_schedule(schedule, gametype='anyball')
+    game_results_json = convert_game_result_to_json(game_generation_results, gametype='anyball')
+
+    print(f"== {game_results_json}")
+    print("-"*80)
+
+    teamlist = data.TEAMS_NFL_AFC_EAST
+    schedule = game.generate_schedule_single_pairs(teamlist)
     game_generation_results = game.generate_games_from_schedule(schedule, gametype='football')
     game_results_json = convert_game_result_to_json(game_generation_results, gametype='football')
 
     print(f"== {game_results_json}")
     print("-"*80)
 
-    teamlist = data.TEAMS_DEFAULT
+    teamlist = data.TEAMS_NHL_EASTERN_ATLANTIC
     schedule = game.generate_schedule_single_pairs(teamlist)
     game_generation_results = game.generate_games_from_schedule(schedule, gametype='hockey')
     game_results_json = convert_game_result_to_json(game_generation_results, gametype='hockey')

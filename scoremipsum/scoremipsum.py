@@ -7,7 +7,6 @@ Scorem
 
 Scorem functions for the `scoremipsum` module.
 """
-import inspect
 import scoremipsum
 from scoremipsum.util.support import get_supported_sports
 

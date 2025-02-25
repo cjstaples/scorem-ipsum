@@ -15,6 +15,13 @@ from scoremipsum.data import TEAMS_DEFAULT
 from scoremipsum.util.scheduler import grouper
 
 
+def compute_score_anyball():
+    score_list = [0, 1, 2, 3, 5, 8, 13, 21]
+    score = (random.choice(score_list) + random.choice(score_list)
+             + random.choice(score_list) + random.choice(score_list))
+    return score
+
+
 def compute_score_football():
     score_list = [0, 3, 7, 10]
     score = (random.choice(score_list) + random.choice(score_list)
@@ -142,7 +149,15 @@ def generate_score_anyball(ruleset=None, active_team=None, opposing_team=None):
     if ruleset is None:
         pass
 
-    score = [99, 0]
+    # score = [99, 0]
+    score_visitors = compute_score_anyball()
+    score_home = compute_score_anyball()
+
+    if score_visitors == score_home:
+        score_visitors, score_home = score_adjust_tie(score_visitors, score_home, game="anyball")
+
+    score = [score_visitors, score_home]
+
     return score
 
 
@@ -201,6 +216,10 @@ def score_adjust_tie(score_visitors, score_home, game=None):
     tiebreak_score_list = []
     if game is None:
         # don't change result_score for unspecified game
+        return score_visitors, score_home
+
+    if game == "anyball":
+        # don't change result_score for anyball game! #haha
         return score_visitors, score_home
 
     if game == "football":
