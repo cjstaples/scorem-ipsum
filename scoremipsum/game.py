@@ -12,7 +12,7 @@ import random
 import itertools
 
 from scoremipsum.data import TEAMS_DEFAULT
-from util.scheduler import grouper
+from scoremipsum.util.scheduler import grouper
 
 
 def compute_score_football():

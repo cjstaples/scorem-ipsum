@@ -9,4 +9,4 @@
 /dist/
 /scoremipsum/__pycache__
 /tests/__pycache__
-/util/__pycache__
+/scoremipsum/util/__pycache__

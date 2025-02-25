@@ -2,8 +2,8 @@
    scoremipsum sanity test / main
 """
 import sys
-from scoremipsum import game, data, util, scoremipsum
-from util.conversion import convert_game_result_to_json
+from scoremipsum import game, data, scoremipsum
+from scoremipsum.util.conversion import convert_game_result_to_json
 
 
 def main():

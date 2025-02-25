@@ -9,7 +9,7 @@ Scorem functions for the `scoremipsum` module.
 """
 import inspect
 import scoremipsum
-from scoremipsum.util import get_supported_sports
+from scoremipsum.util.support import get_supported_sports
 
 
 def game(gametype=None):
