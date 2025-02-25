@@ -9,10 +9,23 @@ keywords = ["scoremipsum", "score", "sports", "sportsball", "generation"]
 version = "0.0.1"
 
 authors = [{name = "Chuck Staples", email = "cjstaples@gmail.com"}]
-readme = "README.md"
-license = {file = "LICENSE"}
-classifiers = ["License :: OSI Approved :: MIT License"]
+
+maintainers = [
+  { name="Charles Staples", email="cjstaples@weaselwatch.com" },
+  { name="Jason Staples", email="js.saberx@gmail.com" },
+]
+
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
 dynamic = ["version", "description"]
+license = {file = "LICENSE"}
+readme = "README.md"
+requires-python = ">=3.8"
 
 [project.urls]
-Home = "https://github.com/cjstaples/scorem-ipsum"
+Homepage = "https://github.com/cjstaples/scorem-ipsum"
+Homepage = "https://github.com/cjstaples/scorem-ipsum/issues"
