@@ -4,8 +4,9 @@
 /.idea/scorem-ipsum.iml
 /.idea/vcs.xml
 /.idea/inspectionProfiles/profiles_settings.xml
+.DS_Store
 *.pyc
-*.pyc
+/dist/
 /scoremipsum/__pycache__
+/tests/__pycache__
 /util/__pycache__
-*.pyc
