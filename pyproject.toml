@@ -1,0 +1,18 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "scorem-ipsum"
+description = "SCOREMIPSUM - generate sportsball score data for testing and demos"
+keywords = ["scoremipsum", "score", "sports", "sportsball", "generation"]
+version = "0.0.1"
+
+authors = [{name = "Chuck Staples", email = "cjstaples@gmail.com"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = ["License :: OSI Approved :: MIT License"]
+dynamic = ["version", "description"]
+
+[project.urls]
+Home = "https://github.com/cjstaples/scorem-ipsum"
