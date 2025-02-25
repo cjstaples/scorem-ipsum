@@ -57,7 +57,7 @@ def main():
     teamlist = data.TEAMS_DEFAULT
     schedule = game.generate_schedule_single_pairs(teamlist)
     game_generation_results = game.generate_games_from_schedule(schedule, gametype='football')
-    game_results_json = convert_game_result_to_json(game_generation_results)
+    game_results_json = convert_game_result_to_json(game_generation_results, gametype='football')
 
     print(f"== {game_results_json}")
     print("-"*80)
@@ -65,7 +65,7 @@ def main():
     teamlist = data.TEAMS_DEFAULT
     schedule = game.generate_schedule_single_pairs(teamlist)
     game_generation_results = game.generate_games_from_schedule(schedule, gametype='hockey')
-    game_results_json = convert_game_result_to_json(game_generation_results)
+    game_results_json = convert_game_result_to_json(game_generation_results, gametype='hockey')
 
     print(f"== {game_results_json}")
     print("-"*80)
