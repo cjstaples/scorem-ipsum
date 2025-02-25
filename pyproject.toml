@@ -1,31 +1,17 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
+requires = ["flit_core >=3.11,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "scorem-ipsum"
-description = "SCOREMIPSUM - generate sportsball score data for testing and demos"
+name = "scoremipsum"
+description = "SCOREM - generate sportsball score data for testing and demos (aka scoremipsum)"
 keywords = ["scoremipsum", "score", "sports", "sportsball", "generation"]
-version = "0.0.1"
-
+version = "0.0.2"
 authors = [{name = "Chuck Staples", email = "cjstaples@gmail.com"}]
-
-maintainers = [
-  { name="Charles Staples", email="cjstaples@weaselwatch.com" },
-  { name="Jason Staples", email="js.saberx@gmail.com" },
-]
-
-classifiers = [
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
-]
-
-dynamic = ["version", "description"]
-license = {file = "LICENSE"}
 readme = "README.md"
-requires-python = ">=3.8"
+license = "MIT"
+license-files = ["LICENSE"]
 
 [project.urls]
-Homepage = "https://github.com/cjstaples/scorem-ipsum"
-Homepage = "https://github.com/cjstaples/scorem-ipsum/issues"
+Home = "https://github.com/cjstaples/scorem-ipsum"
+Issues = "https://github.com/cjstaples/scorem-ipsum/issues"

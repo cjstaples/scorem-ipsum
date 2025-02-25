@@ -4,3 +4,8 @@
 /.idea/scorem-ipsum.iml
 /.idea/vcs.xml
 /.idea/inspectionProfiles/profiles_settings.xml
+*.pyc
+*.pyc
+/scoremipsum/__pycache__
+/util/__pycache__
+*.pyc

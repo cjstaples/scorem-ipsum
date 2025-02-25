@@ -6,16 +6,16 @@
 test_scorem
 ----------
 
-Tests for the `scorem` module.
+Tests for the `scoremipsum` module.
 """
 import json
 import unittest
 from unittest import SkipTest
 
-import scorem
-import scorem.scorem
-import scorem.util
-from scorem import game, data
+import scoremipsum
+import scoremipsum.scoremipsum
+import scoremipsum.util
+from scoremipsum import game, data
 from util.conversion import convert_game_result_to_json
 from util.support import is_valid_json
 
@@ -127,25 +127,25 @@ class TestScorem(unittest.TestCase):
         self.assertEqual(sports_list, ['anyball', 'football', 'hockey'])
 
     def test_get_supported_sports_from_util(self):
-        sports_list = scorem.util.get_supported_sports()
+        sports_list = scoremipsum.util.get_supported_sports()
         self.assertEqual(sports_list, ['anyball', 'football', 'hockey'])
 
     def test_is_supported_anyball(self):
-        self.assertEqual(True, scorem.util.check_support_anyball(), "Anyball not supported")
+        self.assertEqual(True, scoremipsum.util.check_support_anyball(), "Anyball not supported")
 
     @SkipTest
     def test_is_supported_baseball(self):
-        self.assertEqual(True, scorem.util.check_support_baseball(), "Baseball not supported")
+        self.assertEqual(True, scoremipsum.util.check_support_baseball(), "Baseball not supported")
 
     @SkipTest
     def test_is_supported_basketball(self):
-        self.assertEqual(True, scorem.util.check_support_basketball(), "Basketball not supported")
+        self.assertEqual(True, scoremipsum.util.check_support_basketball(), "Basketball not supported")
 
     def test_is_supported_football(self):
-        self.assertEqual(True, scorem.util.check_support_football(), "Football not supported")
+        self.assertEqual(True, scoremipsum.util.check_support_football(), "Football not supported")
 
     def test_is_supported_hockey(self):
-        self.assertEqual(True, scorem.util.check_support_hockey(), "Hockey not supported")
+        self.assertEqual(True, scoremipsum.util.check_support_hockey(), "Hockey not supported")
 
     def test_result_single_anyball(self):
         """

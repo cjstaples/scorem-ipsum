@@ -5,11 +5,11 @@
 Scorem
 ----------
 
-Scorem functions for the `scorem` module.
+Scorem functions for the `scoremipsum` module.
 """
 import inspect
-import scorem
-from scorem.util import get_supported_sports
+import scoremipsum
+from scoremipsum.util import get_supported_sports
 
 
 def game(gametype=None):
@@ -17,7 +17,7 @@ def game(gametype=None):
 
 
 def commands():
-    method_list = [func for func in dir(scorem.scorem) if callable(getattr(scorem.scorem, func)) and not func.startswith("_") and not func.startswith("get_")]
+    method_list = [func for func in dir(scoremipsum.scoremipsum) if callable(getattr(scoremipsum.scoremipsum, func)) and not func.startswith("_") and not func.startswith("get_")]
     return method_list
 
 

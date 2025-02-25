@@ -5,7 +5,7 @@
 conversion
 ----------
 
-conversion utils for the `scorem` module.
+conversion utils for the `scoremipsum` module.
 """
 import json
 

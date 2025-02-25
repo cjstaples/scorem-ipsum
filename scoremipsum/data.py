@@ -5,7 +5,7 @@
 data
 ----------
 
-Data for the `scorem` module.
+Data for the `scoremipsum` module.
 """
 TEAMS_DEFAULT = ("Advancers Battlers Clashers Destroyers "
                  "Engineers Fighters Guardians Harriers").split()

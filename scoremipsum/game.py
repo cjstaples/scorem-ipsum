@@ -5,13 +5,13 @@
 game
 ----------
 
-game functions for the `scorem` module.
+game functions for the `scoremipsum` module.
 """
 
 import random
 import itertools
 
-from scorem.data import TEAMS_DEFAULT
+from scoremipsum.data import TEAMS_DEFAULT
 from util.scheduler import grouper
 
 
@@ -223,7 +223,7 @@ def score_adjust_tie(score_visitors, score_home, game=None):
 
 class GameGeneration:
     """
-    game generation class for the `scorem` module.
+    game generation class for the `scoremipsum` module.
     """
 
     def __init__(self, teams=None):

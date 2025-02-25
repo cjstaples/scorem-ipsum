@@ -1,28 +1,28 @@
 """
-   scorem sanity test / main
+   scoremipsum sanity test / main
 """
 import sys
-from scorem import game, data, util, scorem
+from scoremipsum import game, data, util, scoremipsum
 from util.conversion import convert_game_result_to_json
 
 
 def main():
     """
-    scorem sanity main
+    scoremipsum sanity main
     """
     print("="*80)
-    print('(scorem sanity) :: main ::')
+    print('(scoremipsum sanity) :: main ::')
     print("-"*80)
 
     #   display the supported sports list
     #
-    scorem.sportsball()
+    scoremipsum.sportsball()
 
-    commands = scorem.commands()
+    commands = scoremipsum.commands()
     print(f"== {commands = }")
     print("-"*80)
 
-    sports = scorem.sports()
+    sports = scoremipsum.sports()
     print(f"== {sports = }")
     print("-"*80)
 
@@ -33,21 +33,21 @@ def main():
 
     #   display some scores!
     #
-    sample = scorem.game()
+    sample = scoremipsum.game()
     print(f"== {sample = }")
     print("-"*80)
 
 
     #   display some football scores!
     #
-    sample = scorem.game(gametype="football")
+    sample = scoremipsum.game(gametype="football")
     print(f"== {sample = }")
     print("-"*80)
 
 
     #   display some hockey scores!
     #
-    sample = scorem.game(gametype="hockey")
+    sample = scoremipsum.game(gametype="hockey")
     print(f"== {sample = }")
     print("-"*80)
 
@@ -76,7 +76,7 @@ def main():
     #   display some scores like newspaper results!
     #
 
-    print('(scorem sanity) :: end ::')
+    print('(scoremipsum sanity) :: end ::')
     print("="*80)
     return 0
 

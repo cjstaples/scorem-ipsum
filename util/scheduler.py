@@ -5,7 +5,7 @@
 scheduler
 ----------
 
-scheduler utils for the `scorem` module.
+scheduler utils for the `scoremipsum` module.
 """
 
 

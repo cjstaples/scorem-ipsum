@@ -5,7 +5,7 @@
 support
 ----------
 
-game support utils for the `scorem` module.
+game support utils for the `scoremipsum` module.
 """
 import json
 
