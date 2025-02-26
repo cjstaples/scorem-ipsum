@@ -28,6 +28,6 @@ def convert_game_result_to_json(result_score, gametype=None):
     # json_data = result_score_dict
     result_score_json = json.dumps(result_score_dict, indent=4)
     result_score_list = json.loads(result_score_json)
-    print(f":::: conversion :: {result_score_list = }")
+    print(f":::: conversion :: {result_score_list=}")
 
     return result_score_json

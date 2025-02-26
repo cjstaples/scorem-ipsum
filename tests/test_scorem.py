@@ -14,6 +14,7 @@ from unittest import SkipTest
 
 import scoremipsum
 from scoremipsum import game, data, util
+from scoremipsum.scoremipsum import sports
 from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import is_valid_json
 
@@ -117,10 +118,10 @@ class TestScorem(unittest.TestCase):
             game.generate_games_from_schedule(schedule, gametype='anyball')
         assert game_results is not None
 
-    @SkipTest
+    # @SkipTest
     # fix imports to get this working
     def test_get_supported_sports_from_root(self):
-        sports_list = scoremipsum.sports()
+        sports_list = sports()
         self.assertEqual(sports_list, ['anyball', 'football', 'hockey'])
 
     def test_get_supported_sports_from_util(self):
@@ -169,7 +170,6 @@ class TestScorem(unittest.TestCase):
 
         gametype = json.loads(game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "anyball")
-
 
     def test_result_single_football(self):
         """
@@ -321,7 +321,6 @@ class TestScorem(unittest.TestCase):
         schedule = game.generate_schedule_single_pairs(schedule_set)
         self.assertEqual(4, len(sorted(schedule)))
         print(f"\nnhl eastern atlantic schedule = {schedule}")
-
 
 if __name__ == '__main__':
     import sys

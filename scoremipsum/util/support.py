@@ -15,6 +15,7 @@ import scoremipsum
 def is_valid_json(json_string):
     try:
         result = json.loads(json_string)
+        assert result is not None
         return True
     except json.JSONDecodeError:
         return False

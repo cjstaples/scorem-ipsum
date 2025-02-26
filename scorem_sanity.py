@@ -19,38 +19,30 @@ def main():
     scoremipsum.sportsball()
 
     commands = scoremipsum.commands()
-    print(f"== {commands = }")
+    print(f"== {commands=}")
     print("-"*80)
 
     sports = scoremipsum.sports()
-    print(f"== {sports = }")
+    print(f"== {sports=}")
     print("-"*80)
-
-    # get_supported_sports() direct
-    # supported_sports = util.get_supported_sports()
-    # print(f"== {supported_sports = }")
-    # print("-"*80)
 
     #   display some scores!
     #
     sample = scoremipsum.game()
-    print(f"== {sample = }")
+    print(f"== {sample=}")
     print("-"*80)
-
 
     #   display some football scores!
     #
     sample = scoremipsum.game(gametype="football")
-    print(f"== {sample = }")
+    print(f"== {sample=}")
     print("-"*80)
-
 
     #   display some hockey scores!
     #
     sample = scoremipsum.game(gametype="hockey")
-    print(f"== {sample = }")
+    print(f"== {sample=}")
     print("-"*80)
-
 
     #   display some more interesting scores!
     #
