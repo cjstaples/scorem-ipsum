@@ -13,9 +13,7 @@ import unittest
 from unittest import SkipTest
 
 import scoremipsum
-import scoremipsum.scoremipsum
-import scoremipsum.util
-from scoremipsum import game, data
+from scoremipsum import game, data, util
 from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import is_valid_json
 
@@ -59,8 +57,8 @@ class TestScorem(unittest.TestCase):
 
         :return:
         """
-        data = game.get_team_data()
-        self.assertEqual(data, {'Offense': 2, 'Defense': 2, 'Special': 2})
+        team_data = game.get_team_data()
+        self.assertEqual(team_data, {'Offense': 2, 'Defense': 2, 'Special': 2})
 
     def test_game_get_score_anyball(self):
         """
@@ -117,8 +115,7 @@ class TestScorem(unittest.TestCase):
         schedule = game.generate_schedule_single_pairs(schedule_set)
         game_results = \
             game.generate_games_from_schedule(schedule, gametype='anyball')
-
-        return
+        assert game_results is not None
 
     @SkipTest
     # fix imports to get this working
@@ -329,4 +326,5 @@ class TestScorem(unittest.TestCase):
 if __name__ == '__main__':
     import sys
 
+    # noinspection PyTypeChecker
     sys.exit(unittest.main())
