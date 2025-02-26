@@ -16,7 +16,9 @@ def game(gametype=None):
 
 
 def commands():
-    method_list = [func for func in dir(scoremipsum.scoremipsum) if callable(getattr(scoremipsum.scoremipsum, func)) and not func.startswith("_") and not func.startswith("get_")]
+    method_list = [func for func in dir(scoremipsum.scoremipsum) if
+                   callable(getattr(scoremipsum.scoremipsum, func)) and not func.startswith(
+                       "_") and not func.startswith("get_")]
     return method_list
 
 
@@ -26,7 +28,7 @@ def help():
 
 def sportsball():
     print("== sportsball !")
-    print("-"*80)
+    print("-" * 80)
 
 
 def sports():

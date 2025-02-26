@@ -8,7 +8,9 @@ support
 game support utils for the `scoremipsum` module.
 """
 import json
+
 import scoremipsum
+
 
 def is_valid_json(json_string):
     try:
@@ -16,6 +18,7 @@ def is_valid_json(json_string):
         return True
     except json.JSONDecodeError:
         return False
+
 
 def check_support_anyball():
     """
@@ -26,7 +29,7 @@ def check_support_anyball():
     :return:
     """
     is_supported_anyball = None
-    is_config_enabled_anyball = True                               # future:   local config setting
+    is_config_enabled_anyball = True  # future:   local config setting
     is_present_generate_score_anyball = hasattr(scoremipsum.game, "generate_score_anyball")
     is_present_get_score_anyball = hasattr(scoremipsum.game.GameGeneration, "get_score_anyball")
 
@@ -47,7 +50,7 @@ def check_support_baseball():
     :return:
     """
     is_supported_baseball = None
-    is_config_enabled_baseball = True                             # future:   local config setting
+    is_config_enabled_baseball = True  # future:   local config setting
     is_present_generate_score_baseball = hasattr(scoremipsum.game, "generate_score_baseball")
     is_present_get_score_baseball = hasattr(scoremipsum.game.GameGeneration, "get_score_baseball")
 
@@ -68,7 +71,7 @@ def check_support_basketball():
     :return:
     """
     is_supported_basketball = None
-    is_config_enabled_basketball = True                             # future:   local config setting
+    is_config_enabled_basketball = True  # future:   local config setting
     is_present_generate_score_basketball = hasattr(scoremipsum.game, "generate_score_basketball")
     is_present_get_score_basketball = hasattr(scoremipsum.game.GameGeneration, "get_score_basketball")
 
@@ -89,7 +92,7 @@ def check_support_football():
     :return:
     """
     is_supported_football = None
-    is_config_enabled_football = True                             # future:   local config setting
+    is_config_enabled_football = True  # future:   local config setting
     is_present_generate_score_football = hasattr(scoremipsum.game, "generate_score_football")
     is_present_get_score_football = hasattr(scoremipsum.game.GameGeneration, "get_score_football")
 
@@ -110,7 +113,7 @@ def check_support_hockey():
     :return:
     """
     is_supported_hockey = None
-    is_config_enabled_hockey = True                             # future:   local config setting
+    is_config_enabled_hockey = True  # future:   local config setting
     is_present_generate_score_hockey = hasattr(scoremipsum.game, "generate_score_hockey")
     is_present_get_score_hockey = hasattr(scoremipsum.game.GameGeneration, "get_score_hockey")
 
