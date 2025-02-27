@@ -2,6 +2,7 @@
    scoremipsum sanity test / main
 """
 import sys
+import pprint
 from scoremipsum import game, data, scoremipsum
 from scoremipsum.util.conversion import convert_game_result_to_json
 
@@ -18,6 +19,8 @@ def main():
     #
     scoremipsum.sportsball()
 
+    scoremipsum.help()
+
     commands = scoremipsum.commands()
     print(f"== {commands=}")
     print("-"*80)
@@ -29,21 +32,22 @@ def main():
     #   display some scores!
     #
     sample = scoremipsum.game()
-    print(f"== {sample=}")
+    pprint.pprint(sample)
     print("-"*80)
 
     #   display some football scores!
     #
     sample = scoremipsum.game(gametype="football")
-    print(f"== {sample=}")
+    pprint.pprint(sample)
     print("-"*80)
 
     #   display some hockey scores!
     #
     sample = scoremipsum.game(gametype="hockey")
-    print(f"== {sample=}")
+    pprint.pprint(sample)
     print("-"*80)
 
+    #   -----------------------------------------------------------------------
     #   display some more interesting scores!
     #
     teamlist = data.TEAMS_DEFAULT

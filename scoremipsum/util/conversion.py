@@ -8,7 +8,7 @@ conversion
 conversion utils for the `scoremipsum` module.
 """
 import json
-
+import pprint
 
 def convert_game_result_to_json(result_score, gametype=None):
     result_score_dict = []
@@ -25,9 +25,9 @@ def convert_game_result_to_json(result_score, gametype=None):
         game_dict = dict(zip(keys, values))
         result_score_dict.append(game_dict)
 
-    # json_data = result_score_dict
     result_score_json = json.dumps(result_score_dict, indent=4)
     result_score_list = json.loads(result_score_json)
-    print(f":::: conversion :: {result_score_list=}")
+    # print(f":::: conversion :: {result_score_list=}")
+    # pprint.pprint(result_score_json)
 
     return result_score_json
