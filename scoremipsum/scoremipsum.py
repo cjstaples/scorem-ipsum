@@ -35,7 +35,37 @@ def commands():
 
 
 def help():
-    print("== help() not yet implemented !")
+    print("== help()")
+    print("-" * 9)
+    print("== Use the following commands to get started quickly:")
+    print("== ")
+    print("==       scoremipsum.sportsball()")
+    print("==           Displays 'Sportsball' as a sanity check")
+    print("== ")
+    print("==       scoremipsum.help()")
+    print("==           Displays this content")
+    print("== ")
+    print("==       scoremipsum.commands()")
+    print("==           Displays a list of supported commands")
+    print("==           e.g. commands=['commands', 'game', 'help', 'sports', 'sportsball']")
+    print("== ")
+    print("==       scoremipsum.sports()")
+    print("==           Displays a list of supported sports")
+    print("==           e.g. sports=['anyball', 'football', 'hockey']")
+    print("== ")
+    print("==       scoremipsum.game()")
+    print("==           Generates game scores for default sport, using default generic team list")
+    print("==           Returns JSON object")
+    print("==           Syntax:")
+    print("==               results = scoremipsum.game()")
+    print("== ")
+    print("==       scoremipsum.game(gametype='<gametype>')")
+    print("==           Generates game scores for selected sport, using default team list from that sport")
+    print("==           Returns JSON object")
+    print("==           Syntax:")
+    print("==               results = scoremipsum.game(gametype='hockey')")
+    print("== ")
+
     print("-" * 80)
 
 
