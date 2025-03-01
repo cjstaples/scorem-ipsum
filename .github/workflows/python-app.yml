@@ -37,6 +37,3 @@ jobs:
     - name: Test with unittest
       run: |
         python -m unittest discover -s tests
-    - name: Test with pytest
-      run: |
-        pytest
