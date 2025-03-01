@@ -11,12 +11,18 @@ import scoremipsum
 from scoremipsum import data
 from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import get_supported_sports
+from scoremipsum.util.team import get_default_teamlist_from_gametype
 
 
 def game(gametype=None):
     # print(f"game({gametype=}) not yet implemented !")
     print(f"game({gametype=}) ... ")
-    teamlist = data.TEAMS_DEFAULT
+
+    # DE5: game(gametype=foo) gives incorrect teams in results.
+    #   error here, wrong teamlist for schedule when gametype is not None
+    # teamlist = data.TEAMS_DEFAULT
+    teamlist = get_default_teamlist_from_gametype(gametype)
+
     schedule = scoremipsum.game.generate_schedule_single_pairs(teamlist)
     game_generation_results = scoremipsum.game.generate_games_from_schedule(schedule, gametype=gametype)
     game_results_json = convert_game_result_to_json(game_generation_results, gametype=gametype)

@@ -30,28 +30,13 @@ class TestScorem(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_game_teams_default(self):
-        """
-
-        :return:
-        """
-        self.assertEqual(game.TEAMS_DEFAULT,
-                         ['Advancers', 'Battlers', 'Clashers', 'Destroyers',
-                          'Engineers', 'Fighters', 'Guardians', 'Harriers'])
-
-    def test_game_teams_nfl_afc_east(self):
+    def test_data_get_teamlist_nfl_afc_east(self):
         """
 
         :return:
         """
         self.assertEqual(data.TEAMS_NFL_AFC_EAST,
                          ['Patriots', 'Bills', 'Dolphins', 'Jets'])
-
-    def test_game_team_name(self):
-        """
-
-        :return:
-        """
 
     def test_game_get_team_default_values(self):
         """
@@ -60,6 +45,15 @@ class TestScorem(unittest.TestCase):
         """
         team_data = game.get_team_data()
         self.assertEqual(team_data, {'Offense': 2, 'Defense': 2, 'Special': 2})
+
+    def test_game_get_teamlist_default(self):
+        """
+
+        :return:
+        """
+        self.assertEqual(game.TEAMS_DEFAULT,
+                         ['Advancers', 'Battlers', 'Clashers', 'Destroyers',
+                          'Engineers', 'Fighters', 'Guardians', 'Harriers'])
 
     def test_game_get_score_anyball(self):
         """
