@@ -1,3 +1,6 @@
+[![Pytests](
+https://github.com/cjstaples/scorem-ipsum/actions/workflows/python-app.yml/badge.svg?branch=main
+)](https://github.com/cjstaples/scorem-ipsum/actions/workflows/python-app.yml)
 # scoremipsum
 SCOREMIPSUM
     Generate sports-like scores and statistics 
