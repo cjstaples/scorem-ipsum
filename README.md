@@ -1,12 +1,12 @@
 [![Pytests](
-https://github.com/cjstaples/scorem-ipsum/actions/workflows/python-app.yml/badge.svg?branch=main
+https://github.com/cjstaples/scorem-ipsum/actions/workflows/python-app.yml/badge.svg?branch=master
 )](https://github.com/cjstaples/scorem-ipsum/actions/workflows/python-app.yml)
 # scoremipsum
 SCOREMIPSUM
     Generate sports-like scores and statistics 
     for use in data testing or as content filler. 
 
-# -----------------------------------------------------------------------------
+# -------------------------------------------------------------------
 # DISCLAIMER
     Versions of package [ scoremipsum ] below v1.0.0 are considered pre-release. 
     Features are subject to revision and may change or be removed entirely.
@@ -15,7 +15,7 @@ SCOREMIPSUM
     May contain bugs or unexpected behavior - use at your own risk. 
     
     Please send feedback or code issues to Chuck Staples [ cjstaples@gmail.com ]
-# -----------------------------------------------------------------------------
+# -------------------------------------------------------------------
 
 # features (planned for initial review / v0.5 and release / v1.0)
     * display help
