@@ -8,7 +8,6 @@ Scorem
 Scorem functions for the `scoremipsum` module.
 """
 import scoremipsum
-from scoremipsum import data
 from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import get_supported_sports
 from scoremipsum.util.team import get_default_teamlist_from_gametype

@@ -27,4 +27,3 @@ def get_default_teamlist_from_gametype(gametype=None):
         teamlist = data.TEAMS_DEFAULT
 
     return teamlist
-
