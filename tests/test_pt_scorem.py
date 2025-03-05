@@ -101,8 +101,6 @@ def test_get_supported_sports_from_util():
     sports_list = scoremipsum.util.support.get_supported_sports()
     assert sports_list == ['anyball', 'football', 'hockey']
 
-
-
 def test_is_supported_anyball():
     assert True == scoremipsum.util.support.check_support_anyball()
 
@@ -117,3 +115,144 @@ def test_is_supported_football():
 
 def test_is_supported_hockey():
     assert True == scoremipsum.util.support.check_support_hockey()
+
+def test_result_single_anyball():
+    # schedule_set = ('Anyball_Away', 'Anyball_Home')
+    schedule_set = ('Anyball_Team_AA', 'Anyball_Team_BB')
+    schedule = game.generate_schedule_single_pairs(schedule_set)
+    game_generation_results = \
+        game.generate_games_from_schedule(schedule, gametype='anyball')
+    assert len(schedule_set) / 2 == len(game_generation_results)
+
+    # verify US96: Results reduce ties.  Temporary until ties are permitted.
+    assert game_generation_results[0][0][1] != game_generation_results[0][1][1]
+
+    game_results_json = convert_game_result_to_json(game_generation_results, gametype='anyball')
+    print(f"{game_results_json = }")
+
+    is_good_json = is_valid_json(game_results_json)
+    assert is_good_json == True
+    # NOT GOOD ENOUGH FOR JSON CONTENT CHECKS THOUGH!
+
+    gametype = json.loads(game_results_json)[0]["gametype"]
+    assert gametype == "anyball"
+
+def test_result_single_football():
+    # schedule_set = ('Football_Away', 'Football_Home')
+    schedule_set = ('Football_Team_AA', 'Football_Team_BB')
+    schedule = game.generate_schedule_single_pairs(schedule_set)
+    game_generation_results = \
+        game.generate_games_from_schedule(schedule, gametype='football')
+    assert len(schedule_set) / 2 == len(game_generation_results)
+    # print(f"{game_generation_results = }")
+
+    # verify US96: Results reduce ties.  Temporary until ties are permitted.
+    assert game_generation_results[0][0][1] != game_generation_results[0][1][1]
+
+    game_results_json = convert_game_result_to_json(game_generation_results, gametype='football')
+    print(f"{game_results_json = }")
+
+    is_good_json = is_valid_json(game_results_json)
+    assert is_good_json == True
+    # NOT GOOD ENOUGH FOR JSON CONTENT CHECKS THOUGH!
+
+    gametype = json.loads(game_results_json)[0]["gametype"]
+    assert gametype == "football"
+
+def test_result_single_hockey():
+    # schedule_set = ('Hockey_Away', 'Hockey_Home')
+    schedule_set = ('Hockey_Team_AA', 'Hockey_Team_BB')
+    schedule = game.generate_schedule_single_pairs(schedule_set)
+    game_generation_results = \
+        game.generate_games_from_schedule(schedule, gametype='hockey')
+    assert len(schedule_set) / 2 == len(game_generation_results)
+    # print(f"{game_generation_results = }")
+
+    # verify US96: Results reduce ties.  Temporary until ties are permitted.
+    assert game_generation_results[0][0][1] != game_generation_results[0][1][1]
+
+    game_results_json = convert_game_result_to_json(game_generation_results, gametype='hockey')
+    print(f"{game_results_json = }")
+
+    gametype = json.loads(game_results_json)[0]["gametype"]
+    assert gametype == "hockey"
+
+def test_result_multiple_anyball():
+    schedule_set = ('AA', 'BB', 'CC', 'DD')
+    schedule = game.generate_schedule_single_pairs(schedule_set)
+    game_generation_results = \
+        game.generate_games_from_schedule(schedule, gametype='anyball')
+    assert len(schedule_set) / 2 == len(game_generation_results)
+    # print(f"{game_generation_results = }")
+
+    multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='anyball')
+    print(f"{multi_game_results_json = }")
+
+    gametype = json.loads(multi_game_results_json)[0]["gametype"]
+    assert gametype == "anyball"
+
+def test_result_multiple_football():
+    schedule_set = data.TEAMS_NFL_AFC_EAST
+    schedule = game.generate_schedule_single_pairs(schedule_set)
+    game_generation_results = \
+        game.generate_games_from_schedule(schedule, gametype='football')
+    assert len(schedule_set) / 2 == len(game_generation_results)
+    # print(f"{game_generation_results = }")
+
+    multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='football')
+    print(f"{multi_game_results_json = }")
+
+    gametype = json.loads(multi_game_results_json)[0]["gametype"]
+    assert gametype == "football"
+
+def test_result_multiple_hockey():
+    schedule_set = data.TEAMS_NHL_EASTERN_ATLANTIC
+    schedule = game.generate_schedule_single_pairs(schedule_set)
+    game_generation_results = \
+        game.generate_games_from_schedule(schedule, gametype='hockey')
+    assert len(schedule_set) / 2 == len(game_generation_results)
+    # print(f"{game_generation_results = }")
+
+    multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='hockey')
+    print(f"{multi_game_results_json = }")
+
+    gametype = json.loads(multi_game_results_json)[0]["gametype"]
+    assert gametype == "hockey"
+
+def test_schedule_all_pairs():
+    schedule_set = ('AA', 'BB', 'CC', 'DD')
+    schedule = game.generate_schedule_all_pairs(schedule_set)
+    schedule_expected = \
+        [('AA', 'BB'), ('AA', 'CC'), ('AA', 'DD'),
+         ('BB', 'CC'), ('BB', 'DD'), ('CC', 'DD')]
+    assertEqual(schedule, schedule_expected)
+    print(f"\nschedule = {schedule}")
+
+def test_schedule_single_pairs():
+    schedule_set = ('AA', 'BB', 'CC', 'DD')
+    schedule = game.generate_schedule_single_pairs(schedule_set)
+    assertEqual(len(sorted(schedule)), 2)
+    print(f"\nschedule = {schedule}")
+
+def test_schedule_single_pairs_default():
+    schedule_set = game.TEAMS_DEFAULT
+    schedule = game.generate_schedule_single_pairs(schedule_set)
+    assertEqual(len(sorted(schedule)), 4)
+    print(f"\ndefault teams schedule = {schedule}")
+
+def test_schedule_single_pairs_nfl_afc_east():
+    schedule_set = data.TEAMS_NFL_AFC_EAST
+    schedule = game.generate_schedule_single_pairs(schedule_set)
+    assertEqual(len(sorted(schedule)), 2)
+    print(f"\nnfl afc east schedule = {schedule}")
+
+def test_schedule_single_pairs_nhl_eastern_atlantic():
+    schedule_set = data.TEAMS_NHL_EASTERN_ATLANTIC
+    schedule = game.generate_schedule_single_pairs(schedule_set)
+    assertEqual(4, len(sorted(schedule)))
+    print(f"\nnhl eastern atlantic schedule = {schedule}")
+
+if __name__ == '__main__':
+    import sys
+
+    sys.exit()
