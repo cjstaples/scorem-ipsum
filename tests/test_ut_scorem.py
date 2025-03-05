@@ -19,7 +19,7 @@ from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import is_valid_json
 
 
-class TestScorem(unittest.TestCase):
+class TestUtScorem(unittest.TestCase):
     """
         Test Cases for Scorem module
     """
@@ -112,6 +112,8 @@ class TestScorem(unittest.TestCase):
             game.generate_games_from_schedule(schedule, gametype='anyball')
         assert game_results is not None
 
+    # @SkipTest
+    # fix imports to get this working
     def test_get_supported_sports_from_root(self):
         sports_list = sports()
         self.assertEqual(sports_list, ['anyball', 'football', 'hockey'])
@@ -313,7 +315,6 @@ class TestScorem(unittest.TestCase):
         schedule = game.generate_schedule_single_pairs(schedule_set)
         self.assertEqual(4, len(sorted(schedule)))
         print(f"\nnhl eastern atlantic schedule = {schedule}")
-
 
 if __name__ == '__main__':
     import sys
