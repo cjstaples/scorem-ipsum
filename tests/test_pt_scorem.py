@@ -225,31 +225,31 @@ def test_schedule_all_pairs():
     schedule_expected = \
         [('AA', 'BB'), ('AA', 'CC'), ('AA', 'DD'),
          ('BB', 'CC'), ('BB', 'DD'), ('CC', 'DD')]
-    assertEqual(schedule, schedule_expected)
+    assert schedule == schedule_expected
     print(f"\nschedule = {schedule}")
 
 def test_schedule_single_pairs():
     schedule_set = ('AA', 'BB', 'CC', 'DD')
     schedule = game.generate_schedule_single_pairs(schedule_set)
-    assertEqual(len(sorted(schedule)), 2)
+    assert len(sorted(schedule)) == 2
     print(f"\nschedule = {schedule}")
 
 def test_schedule_single_pairs_default():
     schedule_set = game.TEAMS_DEFAULT
     schedule = game.generate_schedule_single_pairs(schedule_set)
-    assertEqual(len(sorted(schedule)), 4)
+    assert len(sorted(schedule)) == 4
     print(f"\ndefault teams schedule = {schedule}")
 
 def test_schedule_single_pairs_nfl_afc_east():
     schedule_set = data.TEAMS_NFL_AFC_EAST
     schedule = game.generate_schedule_single_pairs(schedule_set)
-    assertEqual(len(sorted(schedule)), 2)
+    assert len(sorted(schedule)) == 2
     print(f"\nnfl afc east schedule = {schedule}")
 
 def test_schedule_single_pairs_nhl_eastern_atlantic():
     schedule_set = data.TEAMS_NHL_EASTERN_ATLANTIC
     schedule = game.generate_schedule_single_pairs(schedule_set)
-    assertEqual(4, len(sorted(schedule)))
+    assert len(sorted(schedule)) == 4
     print(f"\nnhl eastern atlantic schedule = {schedule}")
 
 if __name__ == '__main__':
