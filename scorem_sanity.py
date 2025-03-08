@@ -3,7 +3,7 @@
 """
 import sys
 import pprint
-from scoremipsum import game, data, scoremipsum
+from scoremipsum import game, data, ops
 from scoremipsum.util.conversion import convert_game_result_to_json
 
 
@@ -17,33 +17,33 @@ def main():
 
     #   display the supported sports list
     #
-    scoremipsum.sportsball()
+    ops.sportsball()
 
-    scoremipsum.help()
+    ops.help()
 
-    commands = scoremipsum.commands()
+    commands = ops.commands()
     print(f"== {commands=}")
     print("-"*80)
 
-    sports = scoremipsum.sports()
+    sports = ops.sports()
     print(f"== {sports=}")
     print("-"*80)
 
     #   display some scores!
     #
-    sample = scoremipsum.game()
+    sample = ops.game()
     pprint.pprint(sample)
     print("-"*80)
 
     #   display some football scores!
     #
-    sample = scoremipsum.game(gametype="football")
+    sample = ops.game(gametype="football")
     pprint.pprint(sample)
     print("-"*80)
 
     #   display some hockey scores!
     #
-    sample = scoremipsum.game(gametype="hockey")
+    sample = ops.game(gametype="hockey")
     pprint.pprint(sample)
     print("-"*80)
 

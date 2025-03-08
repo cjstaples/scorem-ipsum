@@ -14,7 +14,7 @@ from unittest import SkipTest
 
 import scoremipsum
 from scoremipsum import game, data
-from scoremipsum.scoremipsum import sports
+from scoremipsum.ops import sports
 from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import is_valid_json
 

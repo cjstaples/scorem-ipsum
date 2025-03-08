@@ -6,7 +6,7 @@ build-backend = "flit_core.buildapi"
 name = "scoremipsum"
 description = "SCOREM - generate sportsball score data for testing and demos (aka scoremipsum)"
 keywords = ["scoremipsum", "score", "sports", "sportsball", "generation"]
-version = "0.0.5"
+version = "0.0.6"
 
 authors = [
     {name = "Chuck Staples", email = "cjstaples@gmail.com"}
@@ -24,3 +24,6 @@ license-files = ["LICENSE"]
 [project.urls]
 Home = "https://github.com/cjstaples/scorem-ipsum"
 Issues = "https://github.com/cjstaples/scorem-ipsum/issues"
+
+[project.scripts]
+demo = "scoremipsum.scoremipsum:demo"
