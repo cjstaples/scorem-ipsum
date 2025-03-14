@@ -3,7 +3,7 @@
 """
 import sys
 
-from scoremipsum import ops
+import ops
 
 
 # import scoremipsum
@@ -21,7 +21,7 @@ def main():
 
     #   display the supported sports list
     #
-    scoremipsum.sportsball()
+    ops.sportsball()
 
     # scoremipsum.help()
 

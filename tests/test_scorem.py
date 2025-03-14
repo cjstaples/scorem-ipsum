@@ -13,7 +13,7 @@ import unittest
 from unittest import SkipTest
 
 import scoremipsum
-from scoremipsum import game, data
+from scoremipsum import generation, data
 from scoremipsum.ops import sports
 from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import is_valid_json
@@ -43,7 +43,7 @@ class TestScorem(unittest.TestCase):
 
         :return:
         """
-        team_data = game.get_team_data()
+        team_data = generation.get_team_data()
         self.assertEqual(team_data, {'Offense': 2, 'Defense': 2, 'Special': 2})
 
     def test_game_get_teamlist_default(self):
@@ -51,7 +51,7 @@ class TestScorem(unittest.TestCase):
 
         :return:
         """
-        self.assertEqual(game.TEAMS_DEFAULT,
+        self.assertEqual(generation.TEAMS_DEFAULT,
                          ['Advancers', 'Battlers', 'Clashers', 'Destroyers',
                           'Engineers', 'Fighters', 'Guardians', 'Harriers'])
 
@@ -62,7 +62,7 @@ class TestScorem(unittest.TestCase):
         :return:
         """
         # return 2 ints, range 0-99
-        score = game.generate_score_anyball()
+        score = generation.generate_score_anyball()
         assert 100 > score[0] >= 0
         assert 100 > score[1] >= 0
         print(f"\nresult_score = {score}")
@@ -76,7 +76,7 @@ class TestScorem(unittest.TestCase):
         """
         # return 2 ints, range 0-74, total < 120
         # this will be weighted for realism and tests adjusted
-        score = game.generate_score_football()
+        score = generation.generate_score_football()
         assert 75 > score[0] >= 0
         assert 75 > score[1] >= 0
         assert 120 > (score[0] + score[1]) >= 0
@@ -91,7 +91,7 @@ class TestScorem(unittest.TestCase):
         """
         # return 2 ints, range 0-16, total < 22
         # this will be weighted for realism and tests adjusted
-        score = game.generate_score_hockey()
+        score = generation.generate_score_hockey()
         assert 17 > score[0] >= 0
         assert 17 > score[1] >= 0
         assert 22 > (score[0] + score[1]) >= 0
@@ -101,15 +101,15 @@ class TestScorem(unittest.TestCase):
     # test invalid until delivery of US111: SCOREM - Specify and Enforce "Away - Home" in Schedule
     def test_generate_schedule_single_pairs(self):
         schedule_set = ('always_team_AWAY', 'always_team_HOME')
-        schedule = game.generate_schedule_single_pairs(schedule_set)
+        schedule = generation.generate_schedule_single_pairs(schedule_set)
         assert schedule[0][0] == 'always_team_AWAY'
         assert schedule[0][1] == 'always_team_HOME'
 
     def test_generate_games_from_schedule(self):
         schedule_set = ('always_team_AWAY', 'always_team_HOME')
-        schedule = game.generate_schedule_single_pairs(schedule_set)
+        schedule = generation.generate_schedule_single_pairs(schedule_set)
         game_results = \
-            game.generate_games_from_schedule(schedule, gametype='anyball')
+            generation.generate_games_from_schedule(schedule, gametype='anyball')
         assert game_results is not None
 
     def test_get_supported_sports_from_root(self):
@@ -144,9 +144,9 @@ class TestScorem(unittest.TestCase):
         """
         # schedule_set = ('Anyball_Away', 'Anyball_Home')
         schedule_set = ('Anyball_Team_AA', 'Anyball_Team_BB')
-        schedule = game.generate_schedule_single_pairs(schedule_set)
+        schedule = generation.generate_schedule_single_pairs(schedule_set)
         game_generation_results = \
-            game.generate_games_from_schedule(schedule, gametype='anyball')
+            generation.generate_games_from_schedule(schedule, gametype='anyball')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
         # print(f"{game_generation_results = }")
 
@@ -170,9 +170,9 @@ class TestScorem(unittest.TestCase):
         """
         # schedule_set = ('Football_Away', 'Football_Home')
         schedule_set = ('Football_Team_AA', 'Football_Team_BB')
-        schedule = game.generate_schedule_single_pairs(schedule_set)
+        schedule = generation.generate_schedule_single_pairs(schedule_set)
         game_generation_results = \
-            game.generate_games_from_schedule(schedule, gametype='football')
+            generation.generate_games_from_schedule(schedule, gametype='football')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
         # print(f"{game_generation_results = }")
 
@@ -192,9 +192,9 @@ class TestScorem(unittest.TestCase):
         """
         # schedule_set = ('Hockey_Away', 'Hockey_Home')
         schedule_set = ('Hockey_Team_AA', 'Hockey_Team_BB')
-        schedule = game.generate_schedule_single_pairs(schedule_set)
+        schedule = generation.generate_schedule_single_pairs(schedule_set)
         game_generation_results = \
-            game.generate_games_from_schedule(schedule, gametype='hockey')
+            generation.generate_games_from_schedule(schedule, gametype='hockey')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
         # print(f"{game_generation_results = }")
 
@@ -213,9 +213,9 @@ class TestScorem(unittest.TestCase):
         :return:
         """
         schedule_set = ('AA', 'BB', 'CC', 'DD')
-        schedule = game.generate_schedule_single_pairs(schedule_set)
+        schedule = generation.generate_schedule_single_pairs(schedule_set)
         game_generation_results = \
-            game.generate_games_from_schedule(schedule, gametype='anyball')
+            generation.generate_games_from_schedule(schedule, gametype='anyball')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
         # print(f"{game_generation_results = }")
 
@@ -231,9 +231,9 @@ class TestScorem(unittest.TestCase):
         :return:
         """
         schedule_set = data.TEAMS_NFL_AFC_EAST
-        schedule = game.generate_schedule_single_pairs(schedule_set)
+        schedule = generation.generate_schedule_single_pairs(schedule_set)
         game_generation_results = \
-            game.generate_games_from_schedule(schedule, gametype='football')
+            generation.generate_games_from_schedule(schedule, gametype='football')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
         # print(f"{game_generation_results = }")
 
@@ -249,9 +249,9 @@ class TestScorem(unittest.TestCase):
         :return:
         """
         schedule_set = data.TEAMS_NHL_EASTERN_ATLANTIC
-        schedule = game.generate_schedule_single_pairs(schedule_set)
+        schedule = generation.generate_schedule_single_pairs(schedule_set)
         game_generation_results = \
-            game.generate_games_from_schedule(schedule, gametype='hockey')
+            generation.generate_games_from_schedule(schedule, gametype='hockey')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
         # print(f"{game_generation_results = }")
 
@@ -267,7 +267,7 @@ class TestScorem(unittest.TestCase):
         :return:
         """
         schedule_set = ('AA', 'BB', 'CC', 'DD')
-        schedule = game.generate_schedule_all_pairs(schedule_set)
+        schedule = generation.generate_schedule_all_pairs(schedule_set)
         schedule_expected = \
             [('AA', 'BB'), ('AA', 'CC'), ('AA', 'DD'),
              ('BB', 'CC'), ('BB', 'DD'), ('CC', 'DD')]
@@ -280,7 +280,7 @@ class TestScorem(unittest.TestCase):
         :return:
         """
         schedule_set = ('AA', 'BB', 'CC', 'DD')
-        schedule = game.generate_schedule_single_pairs(schedule_set)
+        schedule = generation.generate_schedule_single_pairs(schedule_set)
         self.assertEqual(len(sorted(schedule)), 2)
         print(f"\nschedule = {schedule}")
 
@@ -289,8 +289,8 @@ class TestScorem(unittest.TestCase):
 
         :return:
         """
-        schedule_set = game.TEAMS_DEFAULT
-        schedule = game.generate_schedule_single_pairs(schedule_set)
+        schedule_set = generation.TEAMS_DEFAULT
+        schedule = generation.generate_schedule_single_pairs(schedule_set)
         self.assertEqual(len(sorted(schedule)), 4)
         print(f"\ndefault teams schedule = {schedule}")
 
@@ -300,7 +300,7 @@ class TestScorem(unittest.TestCase):
         :return:
         """
         schedule_set = data.TEAMS_NFL_AFC_EAST
-        schedule = game.generate_schedule_single_pairs(schedule_set)
+        schedule = generation.generate_schedule_single_pairs(schedule_set)
         self.assertEqual(len(sorted(schedule)), 2)
         print(f"\nnfl afc east schedule = {schedule}")
 
@@ -310,7 +310,7 @@ class TestScorem(unittest.TestCase):
         :return:
         """
         schedule_set = data.TEAMS_NHL_EASTERN_ATLANTIC
-        schedule = game.generate_schedule_single_pairs(schedule_set)
+        schedule = generation.generate_schedule_single_pairs(schedule_set)
         self.assertEqual(4, len(sorted(schedule)))
         print(f"\nnhl eastern atlantic schedule = {schedule}")
 

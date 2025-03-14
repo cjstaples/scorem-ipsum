@@ -27,3 +27,14 @@ def get_default_teamlist_from_gametype(gametype=None):
         teamlist = data.TEAMS_DEFAULT
 
     return teamlist
+
+
+def get_team_data(team=None):
+    """
+
+    :param team:    identifier for specific team.
+                    must also differentiate for specific sport.
+    :return:
+    """
+    team_data = {'Offense': 2, 'Defense': 2, 'Special': 2}
+    return team_data
