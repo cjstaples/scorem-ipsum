@@ -11,8 +11,6 @@ import json
 
 import scoremipsum
 import scoremipsum.generation
-from scoremipsum.generation import (get_team_data, get_score_hockey, get_score_anyball, get_score_football,
-                                    generate_score_football, generate_score_hockey, generate_score_anyball)
 
 
 def is_valid_json(json_string):

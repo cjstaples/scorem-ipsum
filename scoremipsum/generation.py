@@ -32,6 +32,7 @@ def get_score_anyball(active_team_data=None, opposing_team_data=None):
     score = generate_score_anyball(ruleset, active_team_data, opposing_team_data)
     return score
 
+
 @staticmethod
 def get_score_football(active_team_data=None, opposing_team_data=None):
     """
@@ -49,6 +50,7 @@ def get_score_football(active_team_data=None, opposing_team_data=None):
     score = generate_score_football(ruleset, active_team_data, opposing_team_data)
     return score
 
+
 @staticmethod
 def get_score_hockey(active_team_data=None, opposing_team_data=None):
     """
@@ -65,7 +67,6 @@ def get_score_hockey(active_team_data=None, opposing_team_data=None):
 
     score = generate_score_hockey(ruleset, active_team_data, opposing_team_data)
     return score
-
 
 
 class GameGeneration:
@@ -98,4 +99,3 @@ class GameGeneration:
 
         score = generate_score_anyball(ruleset, active_team_data, opposing_team_data)
         return score
-

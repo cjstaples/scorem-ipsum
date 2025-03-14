@@ -13,14 +13,14 @@ import unittest
 from unittest import SkipTest
 
 import scoremipsum
-from scoremipsum import game, data, score, schedule, generation
+from scoremipsum import data, schedule
 from scoremipsum.ops import sports
 from scoremipsum.schedule import generate_schedule_single_pairs, generate_games_from_schedule, \
     generate_schedule_all_pairs
+from scoremipsum.score import generate_score_anyball, generate_score_football, \
+    generate_score_hockey
 from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import is_valid_json
-from scoremipsum.score import compute_score_anyball, generate_score_anyball, generate_score_football, \
-    generate_score_hockey
 from scoremipsum.util.team import get_team_data
 
 
@@ -106,7 +106,7 @@ class TestUtScorem(unittest.TestCase):
     # test invalid until delivery of US111: SCOREM - Specify and Enforce "Away - Home" in Schedule
     def test_generate_schedule_single_pairs(self):
         schedule_set = ('always_team_AWAY', 'always_team_HOME')
-        game_schedule = game.generate_schedule_single_pairs(schedule_set)
+        game_schedule = schedule.generate_schedule_single_pairs(schedule_set)
         assert game_schedule[0][0] == 'always_team_AWAY'
         assert game_schedule[0][1] == 'always_team_HOME'
 
@@ -155,14 +155,14 @@ class TestUtScorem(unittest.TestCase):
         game_generation_results = \
             generate_games_from_schedule(game_schedule, gametype='anyball')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
-        # print(f"{game_generation_results = }")
+        # print(f"{game_generation_results=}")
 
         # verify US96: Results reduce ties.  Temporary until ties are permitted.
         print(f"RES SINGLE ANY {game_generation_results}=")
         self.assertFalse(game_generation_results[0][0][1] == game_generation_results[0][1][1])
 
         game_results_json = convert_game_result_to_json(game_generation_results, gametype='anyball')
-        print(f"{game_results_json = }")
+        print(f"{game_results_json=}")
 
         is_good_json = is_valid_json(game_results_json)
         self.assertTrue(is_good_json)
@@ -182,13 +182,13 @@ class TestUtScorem(unittest.TestCase):
         game_generation_results = \
             generate_games_from_schedule(game_schedule, gametype='football')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
-        # print(f"{game_generation_results = }")
+        # print(f"{game_generation_results=}")
 
         # verify US96: Results reduce ties.  Temporary until ties are permitted.
         self.assertFalse(game_generation_results[0][0][1] == game_generation_results[0][1][1])
 
         game_results_json = convert_game_result_to_json(game_generation_results, gametype='football')
-        print(f"{game_results_json = }")
+        print(f"{game_results_json=}")
 
         gametype = json.loads(game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "football")
@@ -204,13 +204,13 @@ class TestUtScorem(unittest.TestCase):
         game_generation_results = \
             generate_games_from_schedule(game_schedule, gametype='hockey')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
-        # print(f"{game_generation_results = }")
+        # print(f"{game_generation_results=}")
 
         # verify US96: Results reduce ties.  Temporary until ties are permitted.
         self.assertFalse(game_generation_results[0][0][1] == game_generation_results[0][1][1])
 
         game_results_json = convert_game_result_to_json(game_generation_results, gametype='hockey')
-        print(f"{game_results_json = }")
+        print(f"{game_results_json=}")
 
         gametype = json.loads(game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "hockey")
@@ -225,10 +225,10 @@ class TestUtScorem(unittest.TestCase):
         game_generation_results = \
             generate_games_from_schedule(game_schedule, gametype='anyball')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
-        # print(f"{game_generation_results = }")
+        # print(f"{game_generation_results=}")
 
         multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='anyball')
-        print(f"{multi_game_results_json = }")
+        print(f"{multi_game_results_json=}")
 
         gametype = json.loads(multi_game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "anyball")
@@ -243,10 +243,10 @@ class TestUtScorem(unittest.TestCase):
         game_generation_results = \
             generate_games_from_schedule(game_schedule, gametype='football')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
-        # print(f"{game_generation_results = }")
+        # print(f"{game_generation_results=}")
 
         multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='football')
-        print(f"{multi_game_results_json = }")
+        print(f"{multi_game_results_json=}")
 
         gametype = json.loads(multi_game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "football")
@@ -261,10 +261,10 @@ class TestUtScorem(unittest.TestCase):
         game_generation_results = \
             generate_games_from_schedule(game_schedule, gametype='hockey')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
-        # print(f"{game_generation_results = }")
+        # print(f"{game_generation_results=}")
 
         multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='hockey')
-        print(f"{multi_game_results_json = }")
+        print(f"{multi_game_results_json=}")
 
         gametype = json.loads(multi_game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "hockey")
@@ -321,6 +321,7 @@ class TestUtScorem(unittest.TestCase):
         game_schedule = generate_schedule_single_pairs(schedule_set)
         self.assertEqual(4, len(sorted(game_schedule)))
         print(f"\nnhl eastern atlantic schedule = {game_schedule}")
+
 
 if __name__ == '__main__':
     import sys

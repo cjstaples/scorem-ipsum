@@ -13,7 +13,7 @@ import unittest
 from unittest import SkipTest
 
 import scoremipsum
-from scoremipsum import generation, data, schedule
+from scoremipsum import data, schedule
 from scoremipsum.ops import sports
 from scoremipsum.score import generate_score_anyball, generate_score_football, generate_score_hockey
 from scoremipsum.util import team
@@ -103,7 +103,7 @@ class TestScorem(unittest.TestCase):
     # test invalid until delivery of US111: SCOREM - Specify and Enforce "Away - Home" in Schedule
     def test_generate_schedule_single_pairs(self):
         schedule_set = ('always_team_AWAY', 'always_team_HOME')
-        game_schedule = generation.generate_schedule_single_pairs(schedule_set)
+        game_schedule = schedule.generate_schedule_single_pairs(schedule_set)
         assert game_schedule[0][0] == 'always_team_AWAY'
         assert game_schedule[0][1] == 'always_team_HOME'
 
@@ -150,13 +150,13 @@ class TestScorem(unittest.TestCase):
         game_generation_results = \
             schedule.generate_games_from_schedule(game_schedule, gametype='anyball')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
-        # print(f"{game_generation_results = }")
+        # print(f"{game_generation_results=}")
 
         # verify US96: Results reduce ties.  Temporary until ties are permitted.
         self.assertFalse(game_generation_results[0][0][1] == game_generation_results[0][1][1])
 
         game_results_json = convert_game_result_to_json(game_generation_results, gametype='anyball')
-        print(f"{game_results_json = }")
+        print(f"{game_results_json=}")
 
         is_good_json = is_valid_json(game_results_json)
         self.assertTrue(is_good_json)
@@ -176,13 +176,13 @@ class TestScorem(unittest.TestCase):
         game_generation_results = \
             schedule.generate_games_from_schedule(game_schedule, gametype='football')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
-        # print(f"{game_generation_results = }")
+        # print(f"{game_generation_results=}")
 
         # verify US96: Results reduce ties.  Temporary until ties are permitted.
         self.assertFalse(game_generation_results[0][0][1] == game_generation_results[0][1][1])
 
         game_results_json = convert_game_result_to_json(game_generation_results, gametype='football')
-        print(f"{game_results_json = }")
+        print(f"{game_results_json=}")
 
         gametype = json.loads(game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "football")
@@ -198,13 +198,13 @@ class TestScorem(unittest.TestCase):
         game_generation_results = \
             schedule.generate_games_from_schedule(game_schedule, gametype='hockey')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
-        # print(f"{game_generation_results = }")
+        # print(f"{game_generation_results=}")
 
         # verify US96: Results reduce ties.  Temporary until ties are permitted.
         self.assertFalse(game_generation_results[0][0][1] == game_generation_results[0][1][1])
 
         game_results_json = convert_game_result_to_json(game_generation_results, gametype='hockey')
-        print(f"{game_results_json = }")
+        print(f"{game_results_json=}")
 
         gametype = json.loads(game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "hockey")
@@ -219,10 +219,10 @@ class TestScorem(unittest.TestCase):
         game_generation_results = \
             schedule.generate_games_from_schedule(game_schedule, gametype='anyball')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
-        # print(f"{game_generation_results = }")
+        # print(f"{game_generation_results=}")
 
         multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='anyball')
-        print(f"{multi_game_results_json = }")
+        print(f"{multi_game_results_json=}")
 
         gametype = json.loads(multi_game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "anyball")
@@ -237,10 +237,10 @@ class TestScorem(unittest.TestCase):
         game_generation_results = \
             schedule.generate_games_from_schedule(game_schedule, gametype='football')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
-        # print(f"{game_generation_results = }")
+        # print(f"{game_generation_results=}")
 
         multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='football')
-        print(f"{multi_game_results_json = }")
+        print(f"{multi_game_results_json=}")
 
         gametype = json.loads(multi_game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "football")
@@ -255,10 +255,10 @@ class TestScorem(unittest.TestCase):
         game_generation_results = \
             schedule.generate_games_from_schedule(game_schedule, gametype='hockey')
         self.assertEqual(len(schedule_set) / 2, len(game_generation_results))
-        # print(f"{game_generation_results = }")
+        # print(f"{game_generation_results=}")
 
         multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='hockey')
-        print(f"{multi_game_results_json = }")
+        print(f"{multi_game_results_json=}")
 
         gametype = json.loads(multi_game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "hockey")
