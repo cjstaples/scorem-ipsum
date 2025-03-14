@@ -37,6 +37,7 @@ def check_support_anyball():
     is_present_generate_score_anyball = hasattr(scoremipsum.score, "generate_score_anyball")
     is_present_get_score_anyball = hasattr(scoremipsum.generation, "get_score_anyball")
 
+    #   TODO remove this debug output
     print(f"{is_supported_anyball=}")
     print(f"{is_config_enabled_anyball=}")
     print(f"{is_present_generate_score_anyball=}")
