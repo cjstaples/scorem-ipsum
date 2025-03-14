@@ -26,4 +26,4 @@ Home = "https://github.com/cjstaples/scorem-ipsum"
 Issues = "https://github.com/cjstaples/scorem-ipsum/issues"
 
 [project.scripts]
-demo = "scoremipsum.scoremipsum:demo"
+demo = "scoremipsum:demo"
