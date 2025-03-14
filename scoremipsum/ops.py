@@ -7,7 +7,7 @@ Scorem
 
 Scorem functions for the `scoremipsum` module.
 """
-import scoremipsum
+from scoremipsum.schedule import generate_schedule_single_pairs, generate_games_from_schedule
 from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import get_supported_sports
 from scoremipsum.util.team import get_default_teamlist_from_gametype
@@ -22,8 +22,8 @@ def game(gametype=None):
     # teamlist = data.TEAMS_DEFAULT
     teamlist = get_default_teamlist_from_gametype(gametype)
 
-    schedule = scoremipsum.game.generate_schedule_single_pairs(teamlist)
-    game_generation_results = scoremipsum.game.generate_games_from_schedule(schedule, gametype=gametype)
+    schedule = generate_schedule_single_pairs(teamlist)
+    game_generation_results = generate_games_from_schedule(schedule, gametype=gametype)
     game_results_json = convert_game_result_to_json(game_generation_results, gametype=gametype)
     return game_results_json
 
