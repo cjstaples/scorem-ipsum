@@ -56,7 +56,7 @@ def help():
     print("== ")
     print("==       ops.sports()")
     print("==           Displays a list of supported sports")
-    print("==           e.g. sports=['anyball', 'football', 'hockey']")
+    print("==           e.g. sports=['anyball', 'baseball', 'football', 'hockey']")
     print("== ")
     print("==       ops.game()")
     print("==           Generates game scores for default sport, using default generic team list")

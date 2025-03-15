@@ -8,6 +8,21 @@ def compute_score_anyball():
     return score
 
 
+def compute_score_baseball():
+    # casual model based roughly on:  https://gregstoll.com/~gregstoll/baseball/runsperinning.html
+    # 73% chance of 0 runs
+    # 15% chance of 1 run
+    #  7% chance of 2 runs
+    #  3% chance of 3 runs
+    #  2% chance of 4 runs (or more) -- four max is good enough for now
+    # TODO: Implement a better weighted range here
+    score = 0
+    score_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 3, 4]
+    for inning in range(1, 9):
+        score += random.choice(score_list)
+    return score
+
+
 def compute_score_football():
     score_list = [0, 3, 7, 10]
     score = (random.choice(score_list) + random.choice(score_list)
@@ -44,6 +59,31 @@ def generate_score_anyball(ruleset=None, active_team=None, opposing_team=None):
 
     if score_visitors == score_home:
         score_visitors, score_home = score_adjust_tie(score_visitors, score_home, game="anyball")
+
+    score = [score_visitors, score_home]
+
+    return score
+
+
+def generate_score_baseball(ruleset=None, active_team=None, opposing_team=None):
+    """
+    return a result_score for Baseball (US MLB)
+    teams are rated 1-5 for Offense / Defense / Pitching, default 2
+    result_score generation:
+        TBD
+    :param ruleset:
+    :param active_team:
+    :param opposing_team:
+    :return:
+    """
+    if ruleset is None:
+        pass
+
+    score_visitors = compute_score_baseball()
+    score_home = compute_score_baseball()
+
+    if score_visitors == score_home:
+        score_visitors, score_home = score_adjust_tie(score_visitors, score_home, game="baseball")
 
     score = [score_visitors, score_home]
 
@@ -110,6 +150,9 @@ def score_adjust_tie(score_visitors, score_home, game=None):
     if game == "anyball":
         # don't change result_score for anyball game! #haha
         return score_visitors, score_home
+
+    if game == "baseball":
+        tiebreak_score_list = [1, 1, 1, 1, 1, 1, 1, 2, 3, 4]
 
     if game == "football":
         tiebreak_score_list = [3, 6]

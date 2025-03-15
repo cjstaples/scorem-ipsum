@@ -83,6 +83,7 @@ class GameGeneration:
     def _team(self):
         return random.choice(self._teams)
 
+    # TODO:  figure out why these aren't used, and remove the xget test function
     @staticmethod
     def xget_score_anyball(active_team_data=None, opposing_team_data=None):
         """

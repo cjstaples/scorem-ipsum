@@ -41,7 +41,7 @@ def check_support_anyball():
         is_supported_anyball = False
     return is_supported_anyball
 
-
+# TODO:  rename other is_present functions to match this one (anyball, football, hockey)
 def check_support_baseball():
     """
     check for functions necessary for baseball data
@@ -51,11 +51,11 @@ def check_support_baseball():
     :return:
     """
     is_config_enabled_baseball = True  # future:   local config setting
-    is_present_generate_score_baseball = hasattr(scoremipsum.score, "generate_score_baseball")
-    is_present_get_score_baseball = hasattr(scoremipsum.generation, "get_score_baseball")
+    is_present_score_generate_baseball = hasattr(scoremipsum.score, "generate_score_baseball")
+    is_present_score_compute_baseball = hasattr(scoremipsum.score, "compute_score_baseball")
 
     if (is_config_enabled_baseball
-            and is_present_get_score_baseball and is_present_generate_score_baseball):
+            and is_present_score_compute_baseball and is_present_score_generate_baseball):
         is_supported_baseball = True
     else:
         is_supported_baseball = False

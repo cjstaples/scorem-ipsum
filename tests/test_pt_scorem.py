@@ -17,7 +17,7 @@ from scoremipsum import data
 from scoremipsum.data import TEAMS_NFL_AFC_EAST
 from scoremipsum.ops import sports
 from scoremipsum.schedule import generate_games_from_schedule, generate_schedule_single_pairs
-from scoremipsum.score import generate_score_anyball, generate_score_hockey, generate_score_football
+from scoremipsum.score import generate_score_anyball, generate_score_hockey, generate_score_football, generate_score_baseball
 from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import is_valid_json
 from scoremipsum.util.team import get_team_data
@@ -46,7 +46,7 @@ def test_game_get_teamlist_default():
                                               'Fighters', 'Guardians', 'Harriers']
 
 
-def test_game_get_score_anyball():
+def test_score_generate_score_anyball():
     """
         simulated result_score for single game of anyball (imaginary)
 
@@ -59,7 +59,20 @@ def test_game_get_score_anyball():
     print(f"\nresult_score = {game_score}")
 
 
-def test_game_get_score_football():
+def test_score_generate_score_baseball():
+    """
+        simulated result_score for single game of anyball (imaginary)
+
+    :return:
+    """
+    # return 2 ints, range 0-99
+    game_score = generate_score_baseball()
+    assert 100 > game_score[0] >= 0
+    assert 100 > game_score[1] >= 0
+    print(f"\nresult_score = {game_score}")
+
+
+def test_score_generate_score_football():
     """
         simulated result_score for single game of football
         nfl record for single team result_score is 73
@@ -75,7 +88,7 @@ def test_game_get_score_football():
     print(f"\nresult_score = {game_score}")
 
 
-def test_game_get_score_hockey():
+def test_score_generate_score_hockey():
     """
         simulated result_score for single game of hockey
         nhl record for single team result_score is 16
@@ -110,12 +123,12 @@ def test_generate_games_from_schedule():
 
 def test_get_supported_sports_from_root():
     sports_list = sports()
-    assert sports_list == ['anyball', 'football', 'hockey']
+    assert sports_list == ['anyball', 'baseball', 'football', 'hockey']
 
 
 def test_get_supported_sports_from_util():
     sports_list = scoremipsum.util.support.get_supported_sports()
-    assert sports_list == ['anyball', 'football', 'hockey']
+    assert sports_list == ['anyball', 'baseball', 'football', 'hockey']
 
 
 def test_is_supported_anyball():
@@ -123,11 +136,17 @@ def test_is_supported_anyball():
 
 
 def test_is_supported_baseball():
-    assert scoremipsum.util.support.check_support_baseball() is False
+    # TODO: Test message to remove once implemented
+    print(":: \n")
+    print(":: Setting is_supported_baseball to True as we build functionality.  Remove this message once complete.")
+    assert scoremipsum.util.support.check_support_baseball() is True
 
 
 def test_is_supported_basketball():
-    assert scoremipsum.util.support.check_support_basketball() is False
+    # TODO: Test message to remove once implemented
+    print(":: \n")
+    print(":: Setting is_supported_basketball to True as we build functionality.  Remove this message once complete.")
+    assert scoremipsum.util.support.check_support_basketball() is True
 
 
 def test_is_supported_football():
@@ -144,7 +163,7 @@ def test_result_single_anyball():
     schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
     game_generation_results = \
         generate_games_from_schedule(schedule, gametype='anyball')
-    assert len(schedule_set) / 2 == len(game_generation_results)
+    assert len(schedule_set) // 2 == len(game_generation_results)
 
     # verify US96: Results reduce ties.  Temporary until ties are permitted.
     assert game_generation_results[0][0][1] != game_generation_results[0][1][1]
@@ -160,13 +179,35 @@ def test_result_single_anyball():
     assert gametype == "anyball"
 
 
+def test_result_single_baseball():
+    # schedule_set = ('Baseball_Away', 'Baseball_Home')
+    schedule_set = ('Baseball_Team_AA', 'Baseball_Team_BB')
+    schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
+    game_generation_results = \
+        generate_games_from_schedule(schedule, gametype='baseball')
+    assert len(schedule_set) // 2 == len(game_generation_results)
+
+    # verify US96: Results reduce ties.  Temporary until ties are permitted.
+    assert game_generation_results[0][0][1] != game_generation_results[0][1][1]
+
+    game_results_json = convert_game_result_to_json(game_generation_results, gametype='baseball')
+    print(f"{game_results_json=}")
+
+    is_good_json = is_valid_json(game_results_json)
+    assert is_good_json is True
+    # NOT GOOD ENOUGH FOR JSON CONTENT CHECKS THOUGH!
+
+    gametype = json.loads(game_results_json)[0]["gametype"]
+    assert gametype == "baseball"
+
+
 def test_result_single_football():
     # schedule_set = ('Football_Away', 'Football_Home')
     schedule_set = ('Football_Team_AA', 'Football_Team_BB')
     schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
     game_generation_results = \
         generate_games_from_schedule(schedule, gametype='football')
-    assert len(schedule_set) / 2 == len(game_generation_results)
+    assert len(schedule_set) // 2 == len(game_generation_results)
     # print(f"{game_generation_results=}")
 
     # verify US96: Results reduce ties.  Temporary until ties are permitted.
@@ -189,7 +230,7 @@ def test_result_single_hockey():
     schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
     game_generation_results = \
         generate_games_from_schedule(schedule, gametype='hockey')
-    assert len(schedule_set) / 2 == len(game_generation_results)
+    assert len(schedule_set) // 2 == len(game_generation_results)
     # print(f"{game_generation_results=}")
 
     # verify US96: Results reduce ties.  Temporary until ties are permitted.
@@ -207,7 +248,7 @@ def test_result_multiple_anyball():
     schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
     game_generation_results = \
         generate_games_from_schedule(schedule, gametype='anyball')
-    assert len(schedule_set) / 2 == len(game_generation_results)
+    assert len(schedule_set) // 2 == len(game_generation_results)
     # print(f"{game_generation_results=}")
 
     multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='anyball')
@@ -217,12 +258,27 @@ def test_result_multiple_anyball():
     assert gametype == "anyball"
 
 
+def test_result_multiple_baseball():
+    schedule_set = data.TEAMS_MLB_AL_EAST
+    schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
+    game_generation_results = \
+        generate_games_from_schedule(schedule, gametype='baseball')
+    assert len(schedule_set) // 2 == len(game_generation_results)
+    # print(f"{game_generation_results=}")
+
+    multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='baseball')
+    print(f"{multi_game_results_json=}")
+
+    gametype = json.loads(multi_game_results_json)[0]["gametype"]
+    assert gametype == "baseball"
+
+
 def test_result_multiple_football():
     schedule_set = data.TEAMS_NFL_AFC_EAST
     schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
     game_generation_results = \
         generate_games_from_schedule(schedule, gametype='football')
-    assert len(schedule_set) / 2 == len(game_generation_results)
+    assert len(schedule_set) // 2 == len(game_generation_results)
     # print(f"{game_generation_results=}")
 
     multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='football')
@@ -237,7 +293,7 @@ def test_result_multiple_hockey():
     schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
     game_generation_results = \
         generate_games_from_schedule(schedule, gametype='hockey')
-    assert len(schedule_set) / 2 == len(game_generation_results)
+    assert len(schedule_set) // 2 == len(game_generation_results)
     # print(f"{game_generation_results=}")
 
     multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='hockey')
@@ -271,10 +327,23 @@ def test_schedule_single_pairs_default():
     print(f"\ndefault teams schedule = {schedule}")
 
 
+def test_schedule_single_pairs_mlb_al_east():
+    schedule_set = data.TEAMS_MLB_AL_EAST
+    schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
+    assert len(sorted(schedule)) == 2
+    for game in schedule:
+        for team in game:
+            assert team in data.TEAMS_MLB_AL_EAST
+    print(f"\nmlb al east schedule = {schedule}")
+
+
 def test_schedule_single_pairs_nfl_afc_east():
     schedule_set = data.TEAMS_NFL_AFC_EAST
     schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
     assert len(sorted(schedule)) == 2
+    for game in schedule:
+        for team in game:
+            assert team in data.TEAMS_NFL_AFC_EAST
     print(f"\nnfl afc east schedule = {schedule}")
 
 
@@ -282,6 +351,9 @@ def test_schedule_single_pairs_nhl_eastern_atlantic():
     schedule_set = data.TEAMS_NHL_EASTERN_ATLANTIC
     schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
     assert len(sorted(schedule)) == 4
+    for game in schedule:
+        for team in game:
+            assert team in data.TEAMS_NHL_EASTERN_ATLANTIC
     print(f"\nnhl eastern atlantic schedule = {schedule}")
 
 
