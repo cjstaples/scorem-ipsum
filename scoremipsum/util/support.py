@@ -41,6 +41,7 @@ def check_support_anyball():
         is_supported_anyball = False
     return is_supported_anyball
 
+
 # TODO:  rename other is_present functions to match this one (anyball, football, hockey)
 def check_support_baseball():
     """

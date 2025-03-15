@@ -17,7 +17,8 @@ from scoremipsum import data
 from scoremipsum.data import TEAMS_NFL_AFC_EAST
 from scoremipsum.ops import sports
 from scoremipsum.schedule import generate_games_from_schedule, generate_schedule_single_pairs
-from scoremipsum.score import generate_score_anyball, generate_score_hockey, generate_score_football, generate_score_baseball
+from scoremipsum.score import (generate_score_anyball, generate_score_hockey,
+                               generate_score_football, generate_score_baseball)
 from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import is_valid_json
 from scoremipsum.util.team import get_team_data
@@ -136,9 +137,6 @@ def test_is_supported_anyball():
 
 
 def test_is_supported_baseball():
-    # TODO: Test message to remove once implemented
-    print(":: \n")
-    print(":: Setting is_supported_baseball to True as we build functionality.  Remove this message once complete.")
     assert scoremipsum.util.support.check_support_baseball() is True
 
 
