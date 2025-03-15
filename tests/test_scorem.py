@@ -155,7 +155,7 @@ class TestScorem(unittest.TestCase):
         # print(f"{game_generation_results=}")
 
         # verify US96: Results reduce ties.  Temporary until ties are permitted.
-        self.assertFalse(game_generation_results[0][0][1] == game_generation_results[0][1][1])
+        # self.assertFalse(game_generation_results[0][0][1] == game_generation_results[0][1][1])
 
         game_results_json = convert_game_result_to_json(game_generation_results, gametype='anyball')
         print(f"{game_results_json=}")

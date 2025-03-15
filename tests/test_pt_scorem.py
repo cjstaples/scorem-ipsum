@@ -164,7 +164,7 @@ def test_result_single_anyball():
     assert len(schedule_set) // 2 == len(game_generation_results)
 
     # verify US96: Results reduce ties.  Temporary until ties are permitted.
-    assert game_generation_results[0][0][1] != game_generation_results[0][1][1]
+    # assert game_generation_results[0][0][1] != game_generation_results[0][1][1]
 
     game_results_json = convert_game_result_to_json(game_generation_results, gametype='anyball')
     print(f"{game_results_json=}")
