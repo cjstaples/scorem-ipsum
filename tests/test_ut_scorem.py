@@ -18,7 +18,7 @@ from scoremipsum.ops import sports
 from scoremipsum.schedule import generate_schedule_single_pairs, generate_games_from_schedule, \
     generate_schedule_all_pairs
 from scoremipsum.score import generate_score_anyball, generate_score_football, \
-    generate_score_hockey
+    generate_score_hockey, generate_score_baseball, generate_score_basketball
 from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import is_valid_json
 from scoremipsum.util.team import get_team_data
@@ -72,6 +72,30 @@ class TestUtScorem(unittest.TestCase):
         assert 100 > game_score[1] >= 0
         print(f"\nresult_score = {game_score}")
 
+    def test_game_get_score_baseball(self):
+        """
+            simulated result_score for single game of anyball (imaginary)
+
+        :return:
+        """
+        # return 2 ints, range 0-36
+        game_score = generate_score_baseball()
+        assert 37 > game_score[0] >= 0
+        assert 37 > game_score[1] >= 0
+        print(f"\nresult_score = {game_score}")
+
+    def test_game_get_score_basketball(self):
+        """
+            simulated result_score for single game of anyball (imaginary)
+
+        :return:
+        """
+        # return 2 ints, range 0-149 (0-140, ot 5-9)
+        game_score = generate_score_basketball()
+        assert 150 > game_score[0] >= 0
+        assert 150 > game_score[1] >= 0
+        print(f"\nresult_score = {game_score}")
+
     def test_game_get_score_football(self):
         """
             simulated result_score for single game of football
@@ -119,11 +143,11 @@ class TestUtScorem(unittest.TestCase):
 
     def test_get_supported_sports_from_root(self):
         sports_list = sports()
-        self.assertEqual(sports_list, ['anyball', 'baseball', 'football', 'hockey'])
+        self.assertEqual(sports_list, ['anyball', 'baseball', 'basketball', 'football', 'hockey'])
 
     def test_get_supported_sports_from_util(self):
         sports_list = scoremipsum.util.support.get_supported_sports()
-        self.assertEqual(sports_list, ['anyball', 'baseball', 'football', 'hockey'])
+        self.assertEqual(sports_list, ['anyball', 'baseball', 'basketball', 'football', 'hockey'])
 
     def test_is_supported_anyball(self):
         self.assertEqual(True, scoremipsum.util.support.check_support_anyball(), "Anyball not supported")
@@ -131,7 +155,6 @@ class TestUtScorem(unittest.TestCase):
     def test_is_supported_baseball(self):
         self.assertEqual(True, scoremipsum.util.support.check_support_baseball(), "Baseball not supported")
 
-    @SkipTest
     def test_is_supported_basketball(self):
         self.assertEqual(True, scoremipsum.util.support.check_support_basketball(), "Basketball not supported")
 
@@ -189,6 +212,28 @@ class TestUtScorem(unittest.TestCase):
 
         gametype = json.loads(game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "baseball")
+
+    def test_result_single_basketball(self):
+        """
+
+        :return:
+        """
+        # schedule_set = ('Basketball_Away', 'Basketball_Home')
+        schedule_set = ('Basketball_Team_AA', 'Basketball_Team_BB')
+        game_schedule = schedule.generate_schedule_single_pairs(schedule_set)
+        game_generation_results = \
+            schedule.generate_games_from_schedule(game_schedule, gametype='basketball')
+        self.assertEqual(len(schedule_set) // 2, len(game_generation_results))
+        # print(f"{game_generation_results=}")
+
+        # verify US96: Results reduce ties.  Temporary until ties are permitted.
+        self.assertFalse(game_generation_results[0][0][1] == game_generation_results[0][1][1])
+
+        game_results_json = convert_game_result_to_json(game_generation_results, gametype='basketball')
+        print(f"{game_results_json=}")
+
+        gametype = json.loads(game_results_json)[0]["gametype"]
+        self.assertEqual(gametype, "basketball")
 
     def test_result_single_football(self):
         """
@@ -269,6 +314,24 @@ class TestUtScorem(unittest.TestCase):
 
         gametype = json.loads(multi_game_results_json)[0]["gametype"]
         self.assertEqual(gametype, "baseball")
+
+    def test_result_multiple_basketball(self):
+        """
+
+        :return:
+        """
+        schedule_set = data.TEAMS_NBA_EASTERN_CENTRAL
+        game_schedule = schedule.generate_schedule_single_pairs(schedule_set)
+        game_generation_results = \
+            schedule.generate_games_from_schedule(game_schedule, gametype='basketball')
+        self.assertEqual(len(schedule_set) // 2, len(game_generation_results))
+        # print(f"{game_generation_results=}")
+
+        multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='basketball')
+        print(f"{multi_game_results_json=}")
+
+        gametype = json.loads(multi_game_results_json)[0]["gametype"]
+        self.assertEqual(gametype, "basketball")
 
     def test_result_multiple_football(self):
         """

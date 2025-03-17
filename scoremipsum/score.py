@@ -23,6 +23,14 @@ def compute_score_baseball():
     return score
 
 
+def compute_score_basketball():
+    # no model yet, just some random-ish numbers
+    score_list = [20, 25, 26, 27, 28, 29, 30, 35]
+    score = (random.choice(score_list) + random.choice(score_list)
+             + random.choice(score_list) + random.choice(score_list))
+    return score
+
+
 def compute_score_football():
     score_list = [0, 3, 7, 10]
     score = (random.choice(score_list) + random.choice(score_list)
@@ -84,6 +92,31 @@ def generate_score_baseball(ruleset=None, active_team=None, opposing_team=None):
 
     if score_visitors == score_home:
         score_visitors, score_home = score_adjust_tie(score_visitors, score_home, game="baseball")
+
+    score = [score_visitors, score_home]
+
+    return score
+
+
+def generate_score_basketball(ruleset=None, active_team=None, opposing_team=None):
+    """
+    return a result_score for Basketball (US NBA)
+    teams are rated 1-5 for Offense / Defense / Special, default 2
+    result_score generation:
+        TBD
+    :param ruleset:
+    :param active_team:
+    :param opposing_team:
+    :return:
+    """
+    if ruleset is None:
+        pass
+
+    score_visitors = compute_score_basketball()
+    score_home = compute_score_basketball()
+
+    if score_visitors == score_home:
+        score_visitors, score_home = score_adjust_tie(score_visitors, score_home, game="basketball")
 
     score = [score_visitors, score_home]
 
@@ -153,6 +186,10 @@ def score_adjust_tie(score_visitors, score_home, game=None):
 
     if game == "baseball":
         tiebreak_score_list = [1, 1, 1, 1, 1, 1, 1, 2, 3, 4]
+
+    if game == "basketball":
+        # TODO: basketball overtimes need to account for both teams' scores
+        tiebreak_score_list = [5, 6, 6, 7, 7, 7, 8, 8, 9]
 
     if game == "football":
         tiebreak_score_list = [3, 6]

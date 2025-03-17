@@ -23,7 +23,7 @@ https://github.com/cjstaples/scorem-ipsum/actions/workflows/python-app.yml/badge
         - ops.help()
     * display available commands
         - ops.commands()
-    * get list of supported sports (anyball, baseball, hockey, football)
+    * get list of supported sports (anyball, baseball, basketball, hockey, football)
         - ops.sports()
     * generate pseudo-random scores that are generally realistic for sport
         - adjust generated scores to reduce incidence of ties

@@ -2,7 +2,7 @@ import itertools
 import random
 
 from scoremipsum.score import generate_score_anyball, generate_score_hockey, generate_score_football, \
-    generate_score_baseball
+    generate_score_baseball, generate_score_basketball
 from scoremipsum.util.scheduler import grouper
 
 
@@ -42,6 +42,8 @@ def generate_games_from_schedule(schedule, gametype=None):
             score = generate_score_anyball()
         elif gametype == 'baseball':
             score = generate_score_baseball()
+        elif gametype == 'basketball':
+            score = generate_score_basketball()
         elif gametype == 'hockey':
             score = generate_score_hockey()
         elif gametype == 'football':

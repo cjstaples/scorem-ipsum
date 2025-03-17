@@ -18,7 +18,7 @@ from scoremipsum.data import TEAMS_NFL_AFC_EAST
 from scoremipsum.ops import sports
 from scoremipsum.schedule import generate_games_from_schedule, generate_schedule_single_pairs
 from scoremipsum.score import (generate_score_anyball, generate_score_hockey,
-                               generate_score_football, generate_score_baseball)
+                               generate_score_football, generate_score_baseball, generate_score_basketball)
 from scoremipsum.util.conversion import convert_game_result_to_json
 from scoremipsum.util.support import is_valid_json
 from scoremipsum.util.team import get_team_data
@@ -73,6 +73,19 @@ def test_score_generate_score_baseball():
     print(f"\nresult_score = {game_score}")
 
 
+def test_score_generate_score_basketball():
+    """
+        simulated result_score for single game of anyball (imaginary)
+
+    :return:
+    """
+    # return 2 ints, range 0-149
+    game_score = generate_score_basketball()
+    assert 150 > game_score[0] >= 0
+    assert 150 > game_score[1] >= 0
+    print(f"\nresult_score = {game_score}")
+
+
 def test_score_generate_score_football():
     """
         simulated result_score for single game of football
@@ -124,12 +137,12 @@ def test_generate_games_from_schedule():
 
 def test_get_supported_sports_from_root():
     sports_list = sports()
-    assert sports_list == ['anyball', 'baseball', 'football', 'hockey']
+    assert sports_list == ['anyball', 'baseball', 'basketball', 'football', 'hockey']
 
 
 def test_get_supported_sports_from_util():
     sports_list = scoremipsum.util.support.get_supported_sports()
-    assert sports_list == ['anyball', 'baseball', 'football', 'hockey']
+    assert sports_list == ['anyball', 'baseball', 'basketball', 'football', 'hockey']
 
 
 def test_is_supported_anyball():
@@ -141,9 +154,6 @@ def test_is_supported_baseball():
 
 
 def test_is_supported_basketball():
-    # TODO: Test message to remove once implemented
-    print(":: \n")
-    print(":: Setting is_supported_basketball to True as we build functionality.  Remove this message once complete.")
     assert scoremipsum.util.support.check_support_basketball() is True
 
 
@@ -197,6 +207,28 @@ def test_result_single_baseball():
 
     gametype = json.loads(game_results_json)[0]["gametype"]
     assert gametype == "baseball"
+
+
+def test_result_single_basketball():
+    # schedule_set = ('Basketball_Away', 'Basketball_Home')
+    schedule_set = ('Basketball_Team_AA', 'Basketball_Team_BB')
+    schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
+    game_generation_results = \
+        generate_games_from_schedule(schedule, gametype='basketball')
+    assert len(schedule_set) // 2 == len(game_generation_results)
+
+    # verify US96: Results reduce ties.  Temporary until ties are permitted.
+    assert game_generation_results[0][0][1] != game_generation_results[0][1][1]
+
+    game_results_json = convert_game_result_to_json(game_generation_results, gametype='basketball')
+    print(f"{game_results_json=}")
+
+    is_good_json = is_valid_json(game_results_json)
+    assert is_good_json is True
+    # NOT GOOD ENOUGH FOR JSON CONTENT CHECKS THOUGH!
+
+    gametype = json.loads(game_results_json)[0]["gametype"]
+    assert gametype == "basketball"
 
 
 def test_result_single_football():
@@ -269,6 +301,21 @@ def test_result_multiple_baseball():
 
     gametype = json.loads(multi_game_results_json)[0]["gametype"]
     assert gametype == "baseball"
+
+
+def test_result_multiple_basketball():
+    schedule_set = data.TEAMS_NBA_EASTERN_CENTRAL
+    schedule = scoremipsum.schedule.generate_schedule_single_pairs(schedule_set)
+    game_generation_results = \
+        generate_games_from_schedule(schedule, gametype='basketball')
+    assert len(schedule_set) // 2 == len(game_generation_results)
+    # print(f"{game_generation_results=}")
+
+    multi_game_results_json = convert_game_result_to_json(game_generation_results, gametype='basketball')
+    print(f"{multi_game_results_json=}")
+
+    gametype = json.loads(multi_game_results_json)[0]["gametype"]
+    assert gametype == "basketball"
 
 
 def test_result_multiple_football():

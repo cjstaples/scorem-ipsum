@@ -73,7 +73,7 @@ def check_support_basketball():
     """
     is_config_enabled_basketball = True  # future:   local config setting
     is_present_generate_score_basketball = hasattr(scoremipsum.score, "generate_score_basketball")
-    is_present_get_score_basketball = hasattr(scoremipsum.generation, "get_score_basketball")
+    is_present_get_score_basketball = hasattr(scoremipsum.score, "compute_score_basketball")
 
     if (is_config_enabled_basketball
             and is_present_get_score_basketball and is_present_generate_score_basketball):
