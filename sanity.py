@@ -42,6 +42,12 @@ def main():
     pprint.pprint(sample)
     print("-"*80)
 
+    #   display some baseball scores!
+    #
+    sample = ops.game(gametype="basketball")
+    pprint.pprint(sample)
+    print("-"*80)
+
     #   display some football scores!
     #
     sample = ops.game(gametype="football")
@@ -69,6 +75,14 @@ def main():
     schedule = generate_schedule_single_pairs(teamlist)
     game_generation_results = generate_games_from_schedule(schedule, gametype='baseball')
     game_results_json = convert_game_result_to_json(game_generation_results, gametype='baseball')
+
+    print(f"== {game_results_json}")
+    print("-"*80)
+
+    teamlist = data.TEAMS_NBA_EASTERN_CENTRAL
+    schedule = generate_schedule_single_pairs(teamlist)
+    game_generation_results = generate_games_from_schedule(schedule, gametype='basketball')
+    game_results_json = convert_game_result_to_json(game_generation_results, gametype='basketball')
 
     print(f"== {game_results_json}")
     print("-"*80)

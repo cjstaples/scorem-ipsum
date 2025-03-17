@@ -15,7 +15,7 @@ def compute_score_baseball():
     #  7% chance of 2 runs
     #  3% chance of 3 runs
     #  2% chance of 4 runs (or more) -- four max is good enough for now
-    # TODO: Implement a better weighted range here
+    # BACKLOG US143: Implement a better weighted range here
     score = 0
     score_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 3, 4]
     for inning in range(1, 9):
@@ -188,7 +188,7 @@ def score_adjust_tie(score_visitors, score_home, game=None):
         tiebreak_score_list = [1, 1, 1, 1, 1, 1, 1, 2, 3, 4]
 
     if game == "basketball":
-        # TODO: basketball overtimes need to account for both teams' scores
+        # BACKLOG US144: basketball overtimes need to account for both teams' scores
         tiebreak_score_list = [5, 6, 6, 7, 7, 7, 8, 8, 9]
 
     if game == "football":
