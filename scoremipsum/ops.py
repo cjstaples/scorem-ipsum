@@ -14,14 +14,9 @@ from scoremipsum.util.team import get_default_teamlist_from_gametype
 
 
 def game(gametype=None):
-    # print(f"game({gametype=}) not yet implemented !")
-    print(f"game({gametype=}) ... ")
-
-    # DE5: game(gametype=foo) gives incorrect teams in results.
-    #   error here, wrong teamlist for schedule when gametype is not None
-    # teamlist = data.TEAMS_DEFAULT
+    if not gametype:
+        gametype = 'anyball'
     teamlist = get_default_teamlist_from_gametype(gametype)
-
     schedule = generate_schedule_single_pairs(teamlist)
     game_generation_results = generate_games_from_schedule(schedule, gametype=gametype)
     game_results_json = convert_game_result_to_json(game_generation_results, gametype=gametype)
