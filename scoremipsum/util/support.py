@@ -129,12 +129,59 @@ def get_command_list():
     #                    "_") and not func.startswith("get_")]
     # for now, maintain the command list manually
     override_command_list_getter = True
-    command_list = ['foo']
+    # command_list = ['foo']
+    # command_list = [func for func in dir(scoremipsum.ops) if
+    #                callable(getattr(scoremipsum.ops, func)) and not func.startswith(
+    #                    "_") and not func.startswith("get_")]
+    command_list = [func for func in dir(scoremipsum.ops)
+                    if callable(getattr(scoremipsum.ops, func)) and not func.startswith("_")]
+
 
     if command_list == [] or override_command_list_getter is True:
         command_list = ['commands', 'game', 'help', 'sports', 'sportsball']
 
     return command_list
+
+
+def get_help_content() -> str:
+    """
+    help text content
+    :return:
+    """
+    help_content = "" \
+        + "== help() \n" \
+        + "-" * 9 + "\n" \
+        + "== Use the following commands to get started quickly: \n" \
+        + "== \n" \
+        + "==       ops.sportsball()\n" \
+        + "==           Displays 'Sportsball' as a sanity check\n" \
+        + "== \n" \
+        + "==       ops.help()\n" \
+        + "==           Displays this content\n" \
+        + "== \n" \
+        + "==       ops.commands()\n" \
+        + "==           Displays available commands\n" \
+        + "==           e.g. commands=['commands', 'game', 'help', 'sports', 'sportsball']\n" \
+        + "== \n" \
+        + "==       ops.sports()\n" \
+        + "==           Displays supported sports\n" \
+        + "==           e.g. sports=['anyball', 'baseball', 'basketball', 'football', 'hockey']\n" \
+        + "== \n" \
+        + "==       ops.game()\n" \
+        + "==           Generates game scores for default sport, using default generic team list\n" \
+        + "==           Returns JSON object\n" \
+        + "==           Syntax:\n" \
+        + "==               results = ops.game()\n" \
+        + "== \n" \
+        + "==       ops.game(gametype='<gametype>')\n" \
+        + "==           Generates game scores for selected sport, using default team list from that sport\n" \
+        + "==           Returns JSON object\n" \
+        + "==           Syntax:\n" \
+        + "==               results = ops.game(gametype='hockey')\n" \
+        + "== \n" \
+        + "-" * 80
+
+    return help_content
 
 
 def get_supported_sports():
