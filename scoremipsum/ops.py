@@ -7,9 +7,10 @@ Scorem
 
 Scorem functions for the `scoremipsum` module.
 """
+
 from scoremipsum.schedule import generate_schedule_single_pairs, generate_games_from_schedule
 from scoremipsum.util.conversion import convert_game_result_to_json
-from scoremipsum.util.support import get_supported_sports
+from scoremipsum.util.support import get_supported_sports, get_command_list
 from scoremipsum.util.team import get_default_teamlist_from_gametype
 
 
@@ -24,14 +25,8 @@ def game(gametype=None):
 
 
 def commands():
-
-    # DYNAMIC determination, now returns convert_game_result_to_json() method - mess with this later
-    # method_list = [func for func in dir(scoremipsum.scoremipsum) if
-    #                callable(getattr(scoremipsum.scoremipsum, func)) and not func.startswith(
-    #                    "_") and not func.startswith("get_")]
-    # for now, maintain the command list manually
-    method_list = ['commands', 'game', 'help', 'sports', 'sportsball']
-    return method_list
+    command_list = get_command_list()
+    return command_list
 
 
 def help():
@@ -46,11 +41,11 @@ def help():
     print("==           Displays this content")
     print("== ")
     print("==       ops.commands()")
-    print("==           Displays a list of supported commands")
+    print("==           Displays available commands")
     print("==           e.g. commands=['commands', 'game', 'help', 'sports', 'sportsball']")
     print("== ")
     print("==       ops.sports()")
-    print("==           Displays a list of supported sports")
+    print("==           Displays supported sports")
     print("==           e.g. sports=['anyball', 'baseball', 'basketball', 'football', 'hockey']")
     print("== ")
     print("==       ops.game()")

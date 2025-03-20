@@ -20,7 +20,7 @@ from scoremipsum.schedule import generate_schedule_single_pairs, generate_games_
 from scoremipsum.score import generate_score_anyball, generate_score_football, \
     generate_score_hockey, generate_score_baseball, generate_score_basketball
 from scoremipsum.util.conversion import convert_game_result_to_json
-from scoremipsum.util.support import is_valid_json
+from scoremipsum.util.support import is_valid_json, get_command_list
 from scoremipsum.util.team import get_team_data
 
 
@@ -140,6 +140,10 @@ class TestUtScorem(unittest.TestCase):
         game_results = \
             generate_games_from_schedule(game_schedule, gametype='anyball')
         assert game_results is not None
+
+    def test_get_commands(self):
+        command_list = get_command_list()
+        self.assertEqual(command_list, ['commands', 'game', 'help', 'sports', 'sportsball'])
 
     def test_get_supported_sports_from_root(self):
         sports_list = sports()

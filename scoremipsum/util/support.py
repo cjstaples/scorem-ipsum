@@ -122,6 +122,21 @@ def check_support_hockey():
     return is_supported_hockey
 
 
+def get_command_list():
+    # DYNAMIC determination, now returns convert_game_result_to_json() method - mess with this later
+    # method_list = [func for func in dir(scoremipsum.scoremipsum) if
+    #                callable(getattr(scoremipsum.scoremipsum, func)) and not func.startswith(
+    #                    "_") and not func.startswith("get_")]
+    # for now, maintain the command list manually
+    override_command_list_getter = True
+    command_list = ['foo']
+
+    if command_list == [] or override_command_list_getter is True:
+        command_list = ['commands', 'game', 'help', 'sports', 'sportsball']
+
+    return command_list
+
+
 def get_supported_sports():
     """
     list all sports for which the associated support check passes
