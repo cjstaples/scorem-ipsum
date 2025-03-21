@@ -123,19 +123,14 @@ def check_support_hockey():
 
 
 def get_command_list():
-    # DYNAMIC determination, now returns convert_game_result_to_json() method - mess with this later
-    # method_list = [func for func in dir(scoremipsum.scoremipsum) if
-    #                callable(getattr(scoremipsum.scoremipsum, func)) and not func.startswith(
-    #                    "_") and not func.startswith("get_")]
-    # for now, maintain the command list manually
+    # Dynamic command determination
+    # - get all the callable functions in ops
+    # - filter out the get_ functions which grab data from submodules
+    # set override flag below if it stops working properly
     override_command_list_getter = False
     # command_list = ['foo']
-    # command_list = [func for func in dir(scoremipsum.ops) if
-    #                callable(getattr(scoremipsum.ops, func)) and not func.startswith(
-    #                    "_") and not func.startswith("get_")]
     command_list = [func for func in dir(scoremipsum.ops)
                     if callable(getattr(scoremipsum.ops, func)) and not func.startswith("get_")]
-
 
     if command_list == [] or override_command_list_getter is True:
         command_list = ['commands', 'game', 'help', 'sports', 'sportsball']
@@ -161,7 +156,7 @@ def get_help_content() -> str:
         + "== \n" \
         + "==       ops.commands()\n" \
         + "==           Displays available commands\n" \
-        + "==           e.g. commands=['commands', 'game', 'help', 'sports', 'sportsball']\n" \
+        + "==           e.g. commands=['commands', 'config', 'game', 'help', 'sports', 'sportsball']\n" \
         + "== \n" \
         + "==       ops.config()\n" \
         + "==           Gets or sets config\n" \
