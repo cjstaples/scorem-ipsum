@@ -11,8 +11,20 @@ game functions for the `scoremipsum` module.
 import random
 
 from scoremipsum.data import TEAMS_DEFAULT
+from scoremipsum.schedule import generate_schedule_single_pairs, generate_games_from_schedule
 from scoremipsum.score import generate_score_anyball, generate_score_football, generate_score_hockey
-from scoremipsum.util.team import get_team_data
+from scoremipsum.util.conversion import convert_game_result_to_json
+from scoremipsum.util.team import get_team_data, get_default_teamlist_from_gametype
+
+
+def get_game(gametype=None):
+    if not gametype:
+        gametype = 'anyball'
+    teamlist = get_default_teamlist_from_gametype(gametype)
+    schedule = generate_schedule_single_pairs(teamlist)
+    game_generation_results = generate_games_from_schedule(schedule, gametype=gametype)
+    game_results_json = convert_game_result_to_json(game_generation_results, gametype=gametype)
+    return game_results_json
 
 
 class GameGeneration:
@@ -30,6 +42,7 @@ class GameGeneration:
         return random.choice(self._teams)
 
     # BACKLOG US145:  Fix disconnect for these methods - remove, use as intended and add unit tests, or redesign.
+
     @staticmethod
     def get_result_anyball(active_team_data=None, opposing_team_data=None):
         """

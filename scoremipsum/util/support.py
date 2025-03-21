@@ -128,19 +128,25 @@ def get_command_list():
     #                callable(getattr(scoremipsum.scoremipsum, func)) and not func.startswith(
     #                    "_") and not func.startswith("get_")]
     # for now, maintain the command list manually
-    override_command_list_getter = True
+    override_command_list_getter = False
     # command_list = ['foo']
     # command_list = [func for func in dir(scoremipsum.ops) if
     #                callable(getattr(scoremipsum.ops, func)) and not func.startswith(
     #                    "_") and not func.startswith("get_")]
     command_list = [func for func in dir(scoremipsum.ops)
-                    if callable(getattr(scoremipsum.ops, func)) and not func.startswith("_")]
+                    if callable(getattr(scoremipsum.ops, func)) and not func.startswith("get_")]
 
 
     if command_list == [] or override_command_list_getter is True:
         command_list = ['commands', 'game', 'help', 'sports', 'sportsball']
 
     return command_list
+
+
+def get_config():
+    # placeholder
+    config = {format: 'json'}
+    return config
 
 
 def get_help_content() -> str:
@@ -153,19 +159,13 @@ def get_help_content() -> str:
         + "-" * 9 + "\n" \
         + "== Use the following commands to get started quickly: \n" \
         + "== \n" \
-        + "==       ops.sportsball()\n" \
-        + "==           Displays 'Sportsball' as a sanity check\n" \
-        + "== \n" \
-        + "==       ops.help()\n" \
-        + "==           Displays this content\n" \
-        + "== \n" \
         + "==       ops.commands()\n" \
         + "==           Displays available commands\n" \
         + "==           e.g. commands=['commands', 'game', 'help', 'sports', 'sportsball']\n" \
         + "== \n" \
-        + "==       ops.sports()\n" \
-        + "==           Displays supported sports\n" \
-        + "==           e.g. sports=['anyball', 'baseball', 'basketball', 'football', 'hockey']\n" \
+        + "==       ops.config()\n" \
+        + "==           Gets or sets config\n" \
+        + "==           ** (sorry - not yet implemented) ** \n" \
         + "== \n" \
         + "==       ops.game()\n" \
         + "==           Generates game scores for default sport, using default generic team list\n" \
@@ -179,12 +179,22 @@ def get_help_content() -> str:
         + "==           Syntax:\n" \
         + "==               results = ops.game(gametype='hockey')\n" \
         + "== \n" \
+        + "==       ops.help()\n" \
+        + "==           Displays this content\n" \
+        + "== \n" \
+        + "==       ops.sports()\n" \
+        + "==           Displays supported sports\n" \
+        + "==           e.g. sports=['anyball', 'baseball', 'basketball', 'football', 'hockey']\n" \
+        + "== \n" \
+        + "==       ops.sportsball()\n" \
+        + "==           Displays 'Sportsball' as a sanity check\n" \
+        + "== \n" \
         + "-" * 80
 
     return help_content
 
 
-def get_supported_sports():
+def get_sports_supported():
     """
     list all sports for which the associated support check passes
     :return:

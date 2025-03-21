@@ -8,25 +8,24 @@ Scorem
 Scorem functions for the `scoremipsum` module.
 """
 
-from scoremipsum.schedule import generate_schedule_single_pairs, generate_games_from_schedule
-from scoremipsum.util.conversion import convert_game_result_to_json
-from scoremipsum.util.support import get_supported_sports, get_command_list, get_help_content
-from scoremipsum.util.team import get_default_teamlist_from_gametype
+from scoremipsum.generation import get_game
+from scoremipsum.util.support import get_command_list, get_config, get_help_content, get_sports_supported
 
 
 def game(gametype=None):
-    if not gametype:
-        gametype = 'anyball'
-    teamlist = get_default_teamlist_from_gametype(gametype)
-    schedule = generate_schedule_single_pairs(teamlist)
-    game_generation_results = generate_games_from_schedule(schedule, gametype=gametype)
-    game_results_json = convert_game_result_to_json(game_generation_results, gametype=gametype)
+    game_results_json = get_game(gametype=gametype)
     return game_results_json
 
 
 def commands():
     command_list = get_command_list()
     return command_list
+
+
+def config():
+    # placeholder for config support
+    config_settings = get_config()
+    return config_settings
 
 
 def help():
@@ -40,5 +39,5 @@ def sportsball():
 
 
 def sports():
-    sports_list = get_supported_sports()
+    sports_list = get_sports_supported()
     return sports_list

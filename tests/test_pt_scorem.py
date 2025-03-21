@@ -137,7 +137,7 @@ def test_generate_games_from_schedule():
 
 def test_get_commands():
     command_list = get_command_list()
-    assert command_list == ['commands', 'game', 'help', 'sports', 'sportsball']
+    assert command_list == ['commands', 'config', 'game', 'help', 'sports', 'sportsball']
 
 
 def test_get_supported_sports_from_root():
@@ -146,7 +146,7 @@ def test_get_supported_sports_from_root():
 
 
 def test_get_supported_sports_from_util():
-    sports_list = scoremipsum.util.support.get_supported_sports()
+    sports_list = scoremipsum.util.support.get_sports_supported()
     assert sports_list == ['anyball', 'baseball', 'basketball', 'football', 'hockey']
 
 

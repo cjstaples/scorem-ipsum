@@ -143,14 +143,14 @@ class TestUtScorem(unittest.TestCase):
 
     def test_get_commands(self):
         command_list = get_command_list()
-        self.assertEqual(command_list, ['commands', 'game', 'help', 'sports', 'sportsball'])
+        self.assertEqual(command_list, ['commands', 'config', 'game', 'help', 'sports', 'sportsball'])
 
     def test_get_supported_sports_from_root(self):
         sports_list = sports()
         self.assertEqual(sports_list, ['anyball', 'baseball', 'basketball', 'football', 'hockey'])
 
     def test_get_supported_sports_from_util(self):
-        sports_list = scoremipsum.util.support.get_supported_sports()
+        sports_list = scoremipsum.util.support.get_sports_supported()
         self.assertEqual(sports_list, ['anyball', 'baseball', 'basketball', 'football', 'hockey'])
 
     def test_is_supported_anyball(self):
